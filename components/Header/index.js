@@ -10,12 +10,36 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [menu, setMenu] = useState("menu-white.svg");
+  const [close, setClose] = useState("cancel-white.svg");
+  const [planet, setPlanet] = useState("moon.svg");
 
   const { name, showBlog, showResume } = data;
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // fetch menu, cancel, and planet images
+  useEffect(() => {
+    if (theme === "dark") {
+      setMenu("menu-white.svg");
+    } else {
+      setMenu("menu.svg");
+    }
+
+    if (theme === "dark") {
+      setClose("cancel-white.svg");
+    } else {
+      setClose("cancel.svg");
+    }
+
+    if (theme === "dark") {
+      setPlanet("moon.svg");
+    } else {
+      setPlanet("sun.svg");
+    }
+  }, [theme]);
 
   return (
     <>
@@ -37,33 +61,20 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
                       setTheme(theme === "dark" ? "light" : "dark")
                     }
                   >
-                    <img
-                      className="h-6"
-                      src={`/images/${
-                        theme === "dark" ? "moon.svg" : "sun.svg"
-                      }`}
-                    ></img>
+                    <img className="h-6" src={`/images/${planet}`}></img>
                   </Button>
                 )}
 
                 <Popover.Button>
                   <img
                     className="h-5"
-                    src={`/images/${
-                      !open
-                        ? theme === "dark"
-                          ? "menu-white.svg"
-                          : "menu.svg"
-                        : theme === "light"
-                        ? "cancel.svg"
-                        : "cancel-white.svg"
-                    }`}
+                    src={`/images/${!open ? menu : close}`}
                   ></img>
                 </Popover.Button>
               </div>
             </div>
             <Popover.Panel
-              className={`absolute right-0 z-10 w-11/12 p-4 ${
+              className={`absolute left-1/2 -translate-x-1/2 z-10 w-11/12 p-4 ${
                 theme === "dark" ? "bg-slate-800" : "bg-white"
               } shadow-md rounded-md`}
             >
