@@ -1,0 +1,128 @@
+{
+  "name": "Gaurav",
+  "headerTaglineOne": "Hello 👋",
+  "headerTaglineTwo": "I'm Gaurav Varma - Bay Area developer.",
+  "headerTaglineThree": "Curious problem-solver.",
+  "headerTaglineFour": "Building the future.",
+  "showCursor": true,
+  "showBlog": false,
+  "darkMode": true,
+  "showResume": true,
+  "socials": [
+    {
+      "id": "1",
+      "title": "Github",
+      "link": "https://github.com/Gaurav-Narayan-Varma"
+    },
+    {
+      "id": "2",
+      "title": "LinkedIn",
+      "link": "https://www.linkedin.com/in/gaurav-varma/"
+    },
+    {
+      "id": "3",
+      "title": "Twitter",
+      "link": "https://x.com/GauravV80069026"
+    },
+    { "id": "4", "title": "Email", "link": "mailto:gaurav.varma@hey.com" }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Philly Truce",
+      "description": "Web Development",
+      "imageSrc": "https://media.nbcphiladelphia.com/2024/05/philly-truce.png?resize=1200%2C675&quality=85&strip=all",
+      "url": "https://phillytruce.com/"
+    },
+    {
+      "id": "2",
+      "title": "Demand Gen Consulting LLC",
+      "description": "Web Development",
+      "imageSrc": "https://st4.depositphotos.com/12981370/24312/i/450/depositphotos_243120806-stock-photo-programmer-working-software-development-coding.jpg",
+      "url": "https://www.demandgenconsultant.com/"
+    },
+    {
+      "id": "3",
+      "title": "Yhangry",
+      "description": "Web Development",
+      "imageSrc": "https://storage.googleapis.com/grow-with-goog-publish-prod-media/images/YHANGRY.2e16d0ba.fill-1296x648.format-jpeg.jpg",
+      "url": "https://yhangry.com/booking/gift/"
+    },
+    {
+      "id": "4",
+      "title": "Fleek",
+      "description": "Web Development and Data Analytics",
+      "imageSrc": "https://blog.joinfleek.com/wp-content/uploads/2022/12/color1_icon_transparent_background.png",
+      "url": "https://fleek-analysis.vercel.app/data"
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "title": "Software Engineering",
+      "description": "I offer full stack software solutions leveraging a cutting edge tech stack to deliver optimal performance"
+    },
+    {
+      "id": "2",
+      "title": "Data Analytics",
+      "description": "Drawing on my background as a management consultant and business analyst at Deloitte and other Fortune 100 companies, I identify and present key insights in your businesses data"
+    }
+  ],
+  "aboutpara": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+  "resume": {
+    "tagline": "👋  I'm a software engineer with business acumen.",
+    "description": "I have delivered world-class user experiences to millions of people. Well-versed with Next.js, Javascript, and most of the Web frameworks.",
+    "experiences": [
+      {
+        "id": "1sfdgsfd",
+        "dates": "July 2024 - Present",
+        "type": "Engineer",
+        "position": "Software Engineer at Philly Truce",
+        "bullets": "Developing a full-stack application to help reduce violent conflicts in Philadelphia, Built entire backend SMS tipline service using Twilio"
+      },
+      {
+        "id": "hg",
+        "dates": "March 2024 - Present",
+        "type": "Engineer",
+        "position": "Software Engineer DGCL (Contract)",
+        "bullets": "Revamping the clients current website including developing content and a branding strategy"
+      },
+      {
+        "id": "fa",
+        "dates": "April 2023 - May 2023",
+        "type": "Engineer",
+        "position": "Software Engineer at Yhangry",
+        "bullets": "Collaborated with a team of software engineers to build dynamic and responsive web pages using React and Laravel, ensuring a smooth user experience"
+      },
+      {
+        "id": "asdfsf",
+        "dates": "Feb 2023 - April 2023",
+        "type": "Engineer",
+        "position": "Software Engineer and Data Analyst at Fleek",
+        "bullets": "Created interactive dashboards and analysis using pandas and react charting libraries in the e-commerce space"
+      },
+      {
+        "id": "1",
+        "dates": "August 2021 - February 2022",
+        "type": "Student",
+        "position": "Software Engineer Student at Flatiron Bootcamp",
+        "bullets": "Developed applications in a team setting using full-stack technologies"
+      },
+      {
+        "id": "d495c23b-4f65-479a-9b8a-cfbc1c089725",
+        "dates": "July 2020 - July 2021",
+        "type": "Full Time",
+        "position": "Associate Consultant at Liberty Mutual",
+        "bullets": "Worked with executives across variety of initiatives at company, Managed $25 million partnership with MIT researchers to integrate software AI solutions across company"
+      }
+    ],
+    "education": {
+      "universityName": "Dartmouth College",
+      "universityDate": "2016-2020",
+      "universityPara": "BA, Economics"
+    },
+    "languages": ["Javascript", "HTML5", "CSS", "Python", "Next.js"],
+    "frameworks": ["React", "Typescript", "Tailwind", "MongoDB"],
+    "others": ["Powerpoint", "Pandas", "Word"]
+  }
+}
