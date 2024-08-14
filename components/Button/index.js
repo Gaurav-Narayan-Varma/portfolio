@@ -3,10 +3,15 @@ import { useTheme } from "next-themes";
 import data from "../../data/portfolio.json";
 
 const Button = ({ children, type, onClick, classes }) => {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [buttonClass, setButtonClass] = useState(
     "hover:bg-slate-600 text-white"
   );
+
+  useEffect(() => {
+    setTheme("dark");
+  }, []);
+
   useEffect(() => {
     if (theme === "dark") {
       setButtonClass("hover:bg-slate-600 text-white");

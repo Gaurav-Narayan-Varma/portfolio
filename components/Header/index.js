@@ -18,6 +18,7 @@ const Header = ({ handleWorkScroll, handleAboutScroll, isBlog }) => {
 
   useEffect(() => {
     setMounted(true);
+    setTheme("dark");
   }, []);
 
   // fetch menu, cancel, and planet images

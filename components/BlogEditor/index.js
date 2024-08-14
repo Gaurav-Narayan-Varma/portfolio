@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 import "react-datepicker/dist/react-datepicker.css";
 
 const BlogEditor = ({ post, close, refresh }) => {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [currentTabs, setCurrentTabs] = useState("BLOGDETAILS");
   const [blogContent, setBlogContent] = useState(post.content);
   const [blogVariables, setBlogVariables] = useState({
@@ -17,6 +17,10 @@ const BlogEditor = ({ post, close, refresh }) => {
     preview: post.preview,
     image: post.image,
   });
+
+  useEffect(() => {
+    setTheme("dark");
+  }, []);
 
   const savePost = async () => {
     if (process.env.NODE_ENV === "development") {
