@@ -7,6 +7,14 @@ const Button = ({ children, type, onClick, classes }) => {
   const [buttonClass, setButtonClass] = useState(
     "hover:bg-slate-600 text-white"
   );
+  useEffect(() => {
+    if (theme === "dark") {
+      setButtonClass("hover:bg-slate-600 text-white");
+    } else {
+      setButtonClass("hover:bg-slate-100");
+    }
+  }, [theme]);
+
   if (type === "primary") {
     return (
       <button
@@ -23,13 +31,6 @@ const Button = ({ children, type, onClick, classes }) => {
     );
   }
 
-  useEffect(() => {
-    if (theme === "dark") {
-      setButtonClass("hover:bg-slate-600 text-white");
-    } else {
-      setButtonClass("hover:bg-slate-100");
-    }
-  }, [theme]);
   return (
     <button
       onClick={onClick}
