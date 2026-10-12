@@ -4,6 +4,7 @@ import { ContextSources } from "@/components/chat/context-sources";
 import { Markdown } from "@/components/chat/markdown";
 import { ModelPicker } from "@/components/chat/model-picker";
 import { DEFAULT_CHAT_MODEL_ID, findChatModel } from "@/lib/chat-models";
+import { STARTER_QUESTION_ROWS } from "@/lib/starter-questions";
 import { cn } from "@/lib/utils";
 import { ArrowUp, Check, Copy, Sparkles, Square } from "lucide-react";
 import { motion } from "motion/react";
@@ -22,18 +23,6 @@ type Message = {
   text: string;
   error?: boolean;
 };
-
-/** Starter questions, two per row. */
-const SUGGESTION_ROWS = [
-  [
-    "What is Gaurav prototyping with Deepground?",
-    "What was it like being Inkeep's founding DX engineer?",
-  ],
-  [
-    "What did he build at Clarity before Cursor acquired it?",
-    "How did he go from economics to software engineer?",
-  ],
-];
 
 /** Matches the server, which only reads the most recent messages. */
 const MAX_HISTORY = 6;
@@ -311,7 +300,7 @@ export default function ChatPage() {
 
         {empty ? (
           <div className="absolute left-1/2 top-full mt-5 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 flex-col items-center gap-2">
-            {SUGGESTION_ROWS.map((row, i) => (
+            {STARTER_QUESTION_ROWS.map((row, i) => (
               <div key={i} className="flex flex-wrap justify-center gap-2">
                 {row.map((suggestion) => (
                   <button

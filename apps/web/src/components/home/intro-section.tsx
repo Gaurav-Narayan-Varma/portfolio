@@ -1,6 +1,7 @@
 import { ContextSources } from "@/components/chat/context-sources";
 import AskGauravGPT from "./ask-gauravgpt";
 import ContactMe from "./contact-me";
+import RotatingQuestions from "./rotating-questions";
 export default function IntroSection() {
   return (
     <div className="flex flex-col pt-16 lg:pt-18 px-5 md:px-10 lg:px-12 pb-12 gap-8">
@@ -30,6 +31,7 @@ export default function IntroSection() {
             <AskGauravGPT />
             <ContactMe location="hero" />
           </div>
+          <RotatingQuestions />
           <ContextSources align="start" />
         </div>
       </div>
