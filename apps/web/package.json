@@ -11,7 +11,8 @@
     "pc:check": "tsx scripts/checkPcIndex.ts",
     "pc:create": "tsx scripts/createPcIndex.ts",
     "pc:index": "tsx scripts/indexSite.ts",
-    "pc:query": "tsx scripts/queryPcIndexTest.ts"
+    "pc:query": "tsx scripts/queryPcIndexTest.ts",
+    "writing:cover": "tsx scripts/fetchCover.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.22",
@@ -28,6 +29,7 @@
     "ai": "^4.3.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
     "hono": "^4.13.13",
     "lucide-react": "^0.511.0",
     "motion": "^12.14.0",

@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, PenLine } from "lucide-react";
 import { usePathname } from "next/navigation";
 import NavItem from "./nav-item";
 import UserProfileCard from "./profile-chip";
@@ -17,6 +17,11 @@ export const mainNavItems = [
     href: "/projects",
     icon: "/projects.svg",
     label: "Projects",
+  },
+  {
+    href: "/writing",
+    icon: <PenLine className="w-4 h-4 opacity-80" />,
+    label: "Writing",
   },
   {
     href: "/chat",
@@ -45,6 +50,13 @@ export const connectNavItems = [
   },
 ];
 
+/** Highlights a nav item on its page and on nested pages (e.g. /writing/my-post). */
+function isActivePath(pathname: string, href: string) {
+  return href === "/"
+    ? pathname === href
+    : pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function Sidebar() {
   const pathname = usePathname();
 
@@ -60,7 +72,7 @@ export default function Sidebar() {
               <NavItem
                 key={item.href}
                 {...item}
-                isActive={pathname === item.href}
+                isActive={isActivePath(pathname, item.href)}
               />
             ))}
           </div>
