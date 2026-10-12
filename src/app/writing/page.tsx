@@ -17,7 +17,7 @@ export default function Writing() {
       <div className="flex flex-col gap-3">
         <h1 className="page-title">Writing</h1>
         <p className="page-subtitle">
-          Written 100% by me - every article contains a link to a live recording of me writing it.
+          Written 100% by me.
         </p>
       </div>
 

@@ -4,7 +4,6 @@ description: "A sample post showing how articles are written in markdown and pub
 date: 2026-10-12
 category: Meta
 image: /writing/hello-world.jpg
-proof: https://www.youtube.com/watch?v=GBneIkq9mac
 ---
 
 This is a sample post. Every article on this site is a plain markdown file that lives in the repo, so publishing is just a commit.
