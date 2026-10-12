@@ -50,7 +50,7 @@ This saves `public/writing/my-slug.jpg` and sets `image:` in the article's
 frontmatter. Commit both. The photo is downloaded once, so the site never calls
 an image API at build or run time.
 
-Add a free API key to `apps/web/.env` (if both are set, Unsplash is used; force
+Add a free API key to `.env` (if both are set, Unsplash is used; force
 one with `--provider pixabay`):
 
 | Provider | Env var                | Get a key                          | Notes                          |

@@ -7,7 +7,7 @@
  *   pnpm writing:cover <slug> "laptop on desk" --pick 3   # use option #3
  *   ... --provider pixabay                                # force a provider
  *
- * Providers (set at least one key in apps/web/.env; Unsplash wins if both):
+ * Providers (set at least one key in .env; Unsplash wins if both):
  *   UNSPLASH_ACCESS_KEY  https://unsplash.com/developers  (best photo quality)
  *   PIXABAY_API_KEY      https://pixabay.com/api/docs/    (instant free key)
  *
@@ -128,15 +128,15 @@ function chooseProvider(requested: string | undefined): Provider {
     fail(`Unknown provider "${requested}". Use unsplash or pixabay.`);
   }
   if (requested === "unsplash" || (!requested && unsplashKey)) {
-    if (!unsplashKey) fail("UNSPLASH_ACCESS_KEY is not set in apps/web/.env");
+    if (!unsplashKey) fail("UNSPLASH_ACCESS_KEY is not set in .env");
     return unsplash(unsplashKey);
   }
   if (requested === "pixabay" || (!requested && pixabayKey)) {
-    if (!pixabayKey) fail("PIXABAY_API_KEY is not set in apps/web/.env");
+    if (!pixabayKey) fail("PIXABAY_API_KEY is not set in .env");
     return pixabay(pixabayKey);
   }
   return fail(
-    "No image API key found. Add one to apps/web/.env:\n" +
+    "No image API key found. Add one to .env:\n" +
       "  UNSPLASH_ACCESS_KEY=...   https://unsplash.com/developers (best quality)\n" +
       "  PIXABAY_API_KEY=...       https://pixabay.com/api/docs/ (instant free key)"
   );
