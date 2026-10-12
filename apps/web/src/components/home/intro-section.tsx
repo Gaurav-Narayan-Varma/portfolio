@@ -6,16 +6,19 @@ export default function IntroSection() {
   return (
     <div className="flex flex-col pt-16 lg:pt-18 px-5 md:px-10 lg:px-12 pb-12 gap-8">
       <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
-        <div className="relative hidden lg:block w-full max-w-60 lg:w-60 lg:shrink-0 lg:order-2 aspect-21/34 overflow-hidden rounded-2xl">
-          <div className="absolute inset-0 z-10 rounded-2xl border border-white/20" />
-          <img
-            src="/walking.jpg"
-            alt="Gaurav Varma walking"
-            width={864}
-            height={1400}
-            className="h-full w-full object-cover"
-          />
-        </div>
+        <figure className="hidden lg:flex flex-col gap-2 w-60 shrink-0 lg:order-2 m-0">
+          <div className="relative w-full aspect-21/34 overflow-hidden rounded-2xl">
+            <div className="absolute inset-0 z-10 rounded-2xl border border-white/20" />
+            <img
+              src="/walking.jpg"
+              alt="Gaurav Varma walking"
+              width={864}
+              height={1400}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <figcaption className="text-xs text-white/40">Carmel, CA</figcaption>
+        </figure>
         <div className="flex flex-col gap-5 lg:flex-1 lg:order-1">
           <div className="font-[Inter] text-4xl font-medium flex flex-col gap-1 -tracking-[0.72px] leading-[45px]">
             I build software products from zero to one.
