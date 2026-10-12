@@ -1,6 +1,6 @@
 import { projects } from "@/constants/projectConstants";
 import { SITE_URL } from "@/lib/site";
-import { getAllArticles } from "@/lib/writing";
+import { getInternalArticles } from "@/lib/writing";
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     })),
     { url: `${SITE_URL}/writing`, lastModified: now, priority: 0.8 },
-    ...getAllArticles().map((a) => ({
+    ...getInternalArticles().map((a) => ({
       url: `${SITE_URL}/writing/${a.slug}`,
       lastModified: new Date(a.date),
       priority: 0.6,

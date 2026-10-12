@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { formatArticleDate, type ArticleMeta } from "@/lib/writing";
 
@@ -14,11 +15,10 @@ function CoverPlaceholder({ title }: { title: string }) {
 }
 
 export default function ArticleCard({ article }: { article: ArticleMeta }) {
-  return (
-    <Link
-      href={`/writing/${article.slug}`}
-      className="cursor-default flex flex-col rounded-lg border border-ds-gray-900 overflow-hidden group"
-    >
+  const className =
+    "cursor-default flex flex-col rounded-lg border border-ds-gray-900 overflow-hidden group";
+  const body = (
+    <>
       <div className="aspect-video overflow-hidden">
         <div className="h-full w-full origin-center scale-105 transition-transform duration-300 group-hover:scale-110">
           {article.image ? (
@@ -38,14 +38,39 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
           <div className="text-[15px] font-medium leading-[26.25px] -tracking-[0.15px] text-white">
             {article.title}
           </div>
-          <div className="text-sm font-medium leading-[21px] -tracking-[0.14px] text-white/40">
+          <div className="flex items-center gap-2 text-sm font-medium leading-[21px] -tracking-[0.14px] text-white/40">
             {formatArticleDate(article.date)}
+            {article.externalUrl && (
+              <span className="flex items-center gap-0.5 text-white/50">
+                <span aria-hidden className="mr-1.5">·</span>
+                {article.source ?? "External"}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </span>
+            )}
           </div>
         </div>
         <span className="mt-0.5 shrink-0 rounded-md border border-ds-gray-900 bg-ds-gray-500/60 px-2 py-0.5 text-xs font-medium text-white/50">
           {article.category}
         </span>
       </div>
+    </>
+  );
+
+  if (article.externalUrl) {
+    return (
+      <a
+        href={article.externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {body}
+      </a>
+    );
+  }
+  return (
+    <Link href={`/writing/${article.slug}`} className={className}>
+      {body}
     </Link>
   );
 }

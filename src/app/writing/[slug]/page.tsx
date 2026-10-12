@@ -1,18 +1,18 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Play } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleMarkdown from "@/components/writing/article-markdown";
 import HorizontalRule from "@/components/projects/horizontal-rule";
 import { SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
-import { formatArticleDate, getAllArticles, getArticle } from "@/lib/writing";
+import { formatArticleDate, getArticle, getInternalArticles } from "@/lib/writing";
 
 type Params = { slug: string };
 
 export const dynamicParams = false;
 
 export function generateStaticParams(): Params[] {
-  return getAllArticles().map(({ slug }) => ({ slug }));
+  return getInternalArticles().map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -75,13 +75,25 @@ export default async function Article({
       </Link>
 
       <header className="flex flex-col gap-4">
-        <div className="flex items-center gap-3 text-sm font-medium text-white/40">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-medium text-white/40">
           <span className="rounded-md border border-ds-gray-900 bg-ds-gray-100 px-2 py-0.5 text-xs text-white/60">
             {article.category}
           </span>
           <time dateTime={article.date}>{formatArticleDate(article.date)}</time>
           <span>·</span>
           <span>{article.readingTimeMinutes} min read</span>
+          {article.proof && (
+            <a
+              href={article.proof}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Watch the unedited recording of this article being written"
+              className="cursor-default flex items-center gap-1.5 rounded-full border border-ds-gray-900 bg-ds-gray-100 py-0.5 pl-2 pr-2.5 text-xs text-white/70 transition-colors duration-150 hover:bg-ds-gray-800 hover:text-white"
+            >
+              <Play className="h-2.5 w-2.5 fill-current" />
+              Written live
+            </a>
+          )}
         </div>
         <h1 className="page-title !text-[34px] !leading-[42px]">
           {article.title}

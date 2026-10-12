@@ -26,6 +26,9 @@ Your article body in markdown...
 | `date`        | yes      | `YYYY-MM-DD`. Articles are sorted newest first              |
 | `category`    | no       | Shown as a tag. Defaults to `General`                       |
 | `image`       | no       | Cover image path, e.g. `/writing/cover.jpg` (file in `public/writing/`). 16:9 works best. Falls back to a placeholder |
+| `proof`       | no       | Link (YouTube, Twitch VOD, etc.) to an unedited recording of you writing it. Adds a "Written live" badge |
+| `externalUrl` | no       | Card links straight to this URL (e.g. a piece published elsewhere) and no page is created; the body can be empty |
+| `source`      | no       | Publication name shown on an external card, e.g. `Financial Times` |
 | `draft`       | no       | `true` hides the article from the site, list and sitemap    |
 
 Supported markdown: headings (`##`, `###`), lists, links, images (put files in
