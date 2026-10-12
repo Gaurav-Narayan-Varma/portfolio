@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --font-family-sans:
+    var(--font-manrope), "Manrope Placeholder", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Use dark mode as default even for light mode */
+  --background: #141414;
+  --foreground: #ededed;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  /* #1a1a1a => rgb(26, 26, 26) */
+  --color-ds-gray-100: #1a1a1a;
+  --color-ds-gray-200: #1f1f1f;
+  --color-ds-gray-300: #262626;
+  --color-ds-gray-400: #282828;
+  --color-ds-gray-500: #141414;
+  /* #1a1a1a => rgb(43, 43, 43) */
+  --color-ds-gray-600: #2b2b2b;
+  --color-ds-gray-700: #696969;
+  --color-ds-gray-800: #2b2b2b;
+  --color-ds-gray-900: #303030;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #141414;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.15s ease-in-out;
+}
+
+/* "Thinking" dots in GauravGPT: a wave that moves each dot up and down */
+@keyframes dot-wave {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+.animate-dot-wave {
+  animation: dot-wave 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-dot-wave {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+.hyperlink {
+  @apply text-[#0fabff] hover:text-[#63c9ff] underline cursor-default;
+}
+
+.page-title {
+  @apply text-white text-[28px] font-medium -tracking-[.84] leading-[36.4px] font-[Inter];
+}
+
+.page-subtitle {
+  @apply text-white/60 font-medium text-base -tracking-[.16] leading-7;
+}
+
+.description-text {
+  @apply text-base text-white/60 font-medium leading-7 -tracking-[0.16px];
+}
+
+.caption-text {
+  @apply text-white/50 text-sm leading-[21px] font-[Inter] text-center italic;
+}
