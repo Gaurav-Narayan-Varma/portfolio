@@ -1,5 +1,6 @@
 import ArticleCard from "@/components/writing/article-card";
-import { pageMetadata } from "@/lib/site";
+import { notFound } from "next/navigation";
+import { SHOW_WRITING, pageMetadata } from "@/lib/site";
 import { getAllArticles } from "@/lib/writing";
 
 export const metadata = pageMetadata({
@@ -10,6 +11,7 @@ export const metadata = pageMetadata({
 });
 
 export default function Writing() {
+  if (!SHOW_WRITING) notFound();
   const articles = getAllArticles();
 
   return (

@@ -1,5 +1,5 @@
 import { projects } from "@/constants/projectConstants";
-import { SITE_URL } from "@/lib/site";
+import { SHOW_WRITING, SITE_URL } from "@/lib/site";
 import { getInternalArticles } from "@/lib/writing";
 import type { MetadataRoute } from "next";
 
@@ -13,12 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       priority: 0.7,
     })),
-    { url: `${SITE_URL}/writing`, lastModified: now, priority: 0.8 },
-    ...getInternalArticles().map((a) => ({
-      url: `${SITE_URL}/writing/${a.slug}`,
-      lastModified: new Date(a.date),
-      priority: 0.6,
-    })),
+    ...(SHOW_WRITING
+      ? [
+          { url: `${SITE_URL}/writing`, lastModified: now, priority: 0.8 },
+          ...getInternalArticles().map((a) => ({
+            url: `${SITE_URL}/writing/${a.slug}`,
+            lastModified: new Date(a.date),
+            priority: 0.6,
+          })),
+        ]
+      : []),
     { url: `${SITE_URL}/contact`, lastModified: now, priority: 0.5 },
   ];
 }

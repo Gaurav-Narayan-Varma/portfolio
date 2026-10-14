@@ -19,6 +19,13 @@ export const SITE_TITLE = "Gaurav Varma | Full Stack Engineer";
 export const SITE_DESCRIPTION =
   "Gaurav Varma is a full stack engineer in San Francisco who builds products from concept to launch. Explore his case studies, or ask GauravGPT about his work.";
 
+/**
+ * The Writing section (/writing and its articles) is built but hidden until
+ * there are posts to show. Set to `true` to add it to the navbar and sitemap
+ * and to make the pages reachable again.
+ */
+export const SHOW_WRITING = false;
+
 export const LINKEDIN_URL = "https://www.linkedin.com/in/gaurav-varma";
 export const CAL_URL = "https://cal.com/gaurav-varma-ltovfk/1-1-conversation";
 

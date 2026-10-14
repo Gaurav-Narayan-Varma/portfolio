@@ -6,6 +6,7 @@ import NavItem from "./nav-item";
 import UserProfileCard from "./profile-chip";
 import DesignCredit from "@/components/design-credit";
 import { RESUME_FILENAME, RESUME_PATH } from "@/constants/resume";
+import { SHOW_WRITING } from "@/lib/site";
 
 export const mainNavItems = [
   {
@@ -18,11 +19,15 @@ export const mainNavItems = [
     icon: "/projects.svg",
     label: "Projects",
   },
-  {
-    href: "/writing",
-    icon: <PenLine className="w-4 h-4 opacity-80" />,
-    label: "Writing",
-  },
+  ...(SHOW_WRITING
+    ? [
+        {
+          href: "/writing",
+          icon: <PenLine className="w-4 h-4 opacity-80" />,
+          label: "Writing",
+        },
+      ]
+    : []),
   {
     href: "/chat",
     icon: <MessageCircle className="w-4 h-4 opacity-80" />,

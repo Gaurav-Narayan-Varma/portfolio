@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
         {project.stack.length > 0 && (
           <TooltipProvider delayDuration={0}>
-            <div className="px-4 pb-4.5 flex flex-wrap gap-2">
+            <div className="px-4 pb-4.5 flex flex-nowrap gap-1.5 sm:gap-2">
               {project.stack.map((tool) => (
                 <Tooltip key={tool.name}>
                   <TooltipTrigger asChild>
@@ -49,7 +49,7 @@ export default function ProjectCard({ project }: { project: Project }) {
                       src={tool.image}
                       alt={tool.name}
                       className={cx(
-                        "w-6 h-6 rounded-md opacity-60 hover:opacity-100 transition-opacity duration-150",
+                        "size-6 h-auto min-w-0 shrink aspect-square rounded-md opacity-60 hover:opacity-100 transition-opacity duration-150",
                         tool.bgWhite && "bg-white"
                       )}
                     />

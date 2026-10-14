@@ -1,6 +1,7 @@
 "use client";
 
 import { ContextSources } from "@/components/chat/context-sources";
+import RotatingQuestions from "@/components/home/rotating-questions";
 import { Markdown } from "@/components/chat/markdown";
 import { ModelPicker } from "@/components/chat/model-picker";
 import { DEFAULT_CHAT_MODEL_ID, findChatModel } from "@/lib/chat-models";
@@ -299,22 +300,33 @@ export default function ChatPage() {
         </form>
 
         {empty ? (
-          <div className="absolute left-1/2 top-full mt-5 flex w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 flex-col items-center gap-2">
-            {STARTER_QUESTION_ROWS.map((row, i) => (
-              <div key={i} className="flex flex-wrap justify-center gap-2">
-                {row.map((suggestion) => (
-                  <button
-                    key={suggestion}
-                    type="button"
-                    onClick={() => send(suggestion)}
-                    className="rounded-full bg-[#1e1f20] px-4 py-2 text-sm text-white/80 transition-colors hover:bg-[#2a2b2d] hover:text-white"
-                  >
-                    {suggestion}
-                  </button>
-                ))}
-              </div>
-            ))}
-          </div>
+          <>
+            {/* Phones: one starter question at a time, rotating like the home page */}
+            <div className="absolute left-0 right-0 top-full mt-5 sm:hidden">
+              <RotatingQuestions
+                align="center"
+                showLabel={false}
+                onSelect={(question) => send(question)}
+              />
+            </div>
+            {/* Larger screens: all starter questions */}
+            <div className="absolute left-1/2 top-full mt-5 hidden w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 flex-col items-center gap-2 sm:flex">
+              {STARTER_QUESTION_ROWS.map((row, i) => (
+                <div key={i} className="flex flex-wrap justify-center gap-2">
+                  {row.map((suggestion) => (
+                    <button
+                      key={suggestion}
+                      type="button"
+                      onClick={() => send(suggestion)}
+                      className="rounded-full bg-[#1e1f20] px-4 py-2 text-sm text-white/80 transition-colors hover:bg-[#2a2b2d] hover:text-white"
+                    >
+                      {suggestion}
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
           <ContextSources className="mt-3" />
         )}

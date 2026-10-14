@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleMarkdown, { InlineMarkdown } from "@/components/writing/article-markdown";
 import HorizontalRule from "@/components/projects/horizontal-rule";
-import { SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
+import { SHOW_WRITING, SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
 import {
   SHOW_CATEGORIES,
   formatArticleDate,
@@ -18,6 +18,7 @@ type Params = { slug: string };
 export const dynamicParams = false;
 
 export function generateStaticParams(): Params[] {
+  if (!SHOW_WRITING) return [];
   return getInternalArticles().map(({ slug }) => ({ slug }));
 }
 
@@ -51,7 +52,7 @@ export default async function Article({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const article = SHOW_WRITING ? getArticle(slug) : undefined;
   if (!article) notFound();
 
   const jsonLd = {
