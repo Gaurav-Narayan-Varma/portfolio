@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { formatArticleDate, type ArticleMeta } from "@/lib/writing";
+import { SHOW_CATEGORIES, formatArticleDate, type ArticleMeta } from "@/lib/writing";
 
 /** Shown when an article has no `image` in its frontmatter. */
 function CoverPlaceholder({ title }: { title: string }) {
@@ -49,9 +49,11 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
             )}
           </div>
         </div>
-        <span className="mt-0.5 shrink-0 rounded-md border border-ds-gray-900 bg-ds-gray-500/60 px-2 py-0.5 text-xs font-medium text-white/50">
-          {article.category}
-        </span>
+        {SHOW_CATEGORIES && (
+          <span className="mt-0.5 shrink-0 rounded-md border border-ds-gray-900 bg-ds-gray-500/60 px-2 py-0.5 text-xs font-medium text-white/50">
+            {article.category}
+          </span>
+        )}
       </div>
     </>
   );

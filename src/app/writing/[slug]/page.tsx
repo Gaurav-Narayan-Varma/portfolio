@@ -2,10 +2,16 @@ import { ArrowLeft, Play } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ArticleMarkdown from "@/components/writing/article-markdown";
+import ArticleMarkdown, { InlineMarkdown } from "@/components/writing/article-markdown";
 import HorizontalRule from "@/components/projects/horizontal-rule";
 import { SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
-import { formatArticleDate, getArticle, getInternalArticles } from "@/lib/writing";
+import {
+  SHOW_CATEGORIES,
+  formatArticleDate,
+  getArticle,
+  getInternalArticles,
+  stripInlineMarkdown,
+} from "@/lib/writing";
 
 type Params = { slug: string };
 
@@ -25,7 +31,7 @@ export async function generateMetadata({
   if (!article) return {};
   const base = pageMetadata({
     title: article.title,
-    description: article.description,
+    description: stripInlineMarkdown(article.description),
     path: `/writing/${slug}`,
   });
   return {
@@ -52,7 +58,7 @@ export default async function Article({
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: article.title,
-    description: article.description,
+    description: stripInlineMarkdown(article.description),
     datePublished: article.date,
     url: `${SITE_URL}/writing/${slug}`,
     author: { "@type": "Person", name: SITE_NAME, url: SITE_URL },
@@ -76,9 +82,11 @@ export default async function Article({
 
       <header className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm font-medium text-white/40">
-          <span className="rounded-md border border-ds-gray-900 bg-ds-gray-100 px-2 py-0.5 text-xs text-white/60">
-            {article.category}
-          </span>
+          {SHOW_CATEGORIES && (
+            <span className="rounded-md border border-ds-gray-900 bg-ds-gray-100 px-2 py-0.5 text-xs text-white/60">
+              {article.category}
+            </span>
+          )}
           <time dateTime={article.date}>{formatArticleDate(article.date)}</time>
           <span>·</span>
           <span>{article.readingTimeMinutes} min read</span>
@@ -98,16 +106,25 @@ export default async function Article({
         <h1 className="page-title !text-[34px] !leading-[42px]">
           {article.title}
         </h1>
-        <p className="page-subtitle">{article.description}</p>
+        <p className="page-subtitle">
+          <InlineMarkdown>{article.description}</InlineMarkdown>
+        </p>
       </header>
 
       {article.image && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={article.image}
-          alt={article.title}
-          className="w-full rounded-lg border border-ds-gray-900 object-cover aspect-video"
-        />
+        <figure className="flex flex-col gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={article.image}
+            alt={article.imageCaption ?? article.title}
+            className="w-full rounded-lg border border-ds-gray-900 object-cover aspect-video"
+          />
+          {article.imageCaption && (
+            <figcaption className="caption-text">
+              {article.imageCaption}
+            </figcaption>
+          )}
+        </figure>
       )}
 
       <HorizontalRule />

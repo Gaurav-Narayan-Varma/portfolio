@@ -96,6 +96,30 @@ const components: Components = {
   ),
 };
 
+/** Inline-only markdown (italic, bold, code) for short text like the description. */
+export function InlineMarkdown({ children }: { children: string }) {
+  return (
+    <ReactMarkdown
+      allowedElements={["p", "em", "strong", "code"]}
+      unwrapDisallowed
+      components={{
+        p: ({ children }) => <>{children}</>,
+        em: ({ children }) => <em className="italic">{children}</em>,
+        strong: ({ children }) => (
+          <strong className="font-semibold text-white/80">{children}</strong>
+        ),
+        code: ({ children }) => (
+          <code className="rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-[0.85em]">
+            {children}
+          </code>
+        ),
+      }}
+    >
+      {children}
+    </ReactMarkdown>
+  );
+}
+
 export default function ArticleMarkdown({ children }: { children: string }) {
   return (
     <div className="description-text !text-[17px] !leading-8 !text-white/70">

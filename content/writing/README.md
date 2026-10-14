@@ -22,10 +22,11 @@ Your article body in markdown...
 | Field         | Required | Notes                                                       |
 | ------------- | -------- | ----------------------------------------------------------- |
 | `title`       | yes      |                                                             |
-| `description` | yes      | Used on the list page, meta description and social cards    |
+| `description` | yes      | Subtitle, meta description and social cards. Inline markdown like `_italic_` works in the subtitle (stripped for meta tags) |
 | `date`        | yes      | `YYYY-MM-DD`. Articles are sorted newest first              |
-| `category`    | no       | Shown as a tag. Defaults to `General`                       |
+| `category`    | no       | Shown as a tag once `SHOW_CATEGORIES` is turned on in `src/lib/writing.ts` (hidden for now). Defaults to `General` |
 | `image`       | no       | Cover image path, e.g. `/writing/cover.jpg` (file in `public/writing/`). 16:9 works best. Falls back to a placeholder |
+| `imageCaption`| no       | Caption shown below the cover image on the article page (e.g. a photo credit) |
 | `proof`       | no       | Link (YouTube, Twitch VOD, etc.) to an unedited recording of you writing it. Adds a "Written live" badge |
 | `externalUrl` | no       | Card links straight to this URL (e.g. a piece published elsewhere) and no page is created; the body can be empty |
 | `source`      | no       | Publication name shown on an external card, e.g. `Financial Times` |

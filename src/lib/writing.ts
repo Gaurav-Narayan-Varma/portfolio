@@ -7,6 +7,13 @@ import matter from "gray-matter";
  * `.md`) is the URL slug: `content/writing/my-post.md` -> `/writing/my-post`.
  * See `content/writing/README.md` for the frontmatter format.
  */
+/**
+ * Category tags are hidden in the UI until there are enough articles to
+ * bucket. Set to `true` to show them on cards and article pages again; the
+ * `category` frontmatter field is still read either way.
+ */
+export const SHOW_CATEGORIES = false;
+
 const WRITING_DIR = path.join(process.cwd(), "content", "writing");
 
 export type ArticleMeta = {
@@ -18,6 +25,8 @@ export type ArticleMeta = {
   category: string;
   /** Optional cover image path (e.g. /writing/my-cover.jpg) */
   image?: string;
+  /** Optional caption shown under the cover image on the article page */
+  imageCaption?: string;
   /** Optional link to a recording of the article being written (http/https) */
   proof?: string;
   /** If set, the card links out to this URL and no page is generated */
@@ -74,6 +83,10 @@ function parseArticle(file: string): Article | null {
     description: requireString(data.description, "description", file),
     date: toIsoDate(data.date, file),
     category: typeof data.category === "string" ? data.category.trim() : "General",
+    imageCaption:
+      typeof data.imageCaption === "string" && data.imageCaption.trim()
+        ? data.imageCaption.trim()
+        : undefined,
     image:
       typeof data.image === "string" && data.image.trim()
         ? data.image.trim()
@@ -104,6 +117,14 @@ export function getInternalArticles(): Article[] {
 
 export function getArticle(slug: string): Article | undefined {
   return getInternalArticles().find((article) => article.slug === slug);
+}
+
+/** Removes inline markdown (`_em_`, `**bold**`, `code`) for meta tags and JSON-LD. */
+export function stripInlineMarkdown(text: string) {
+  return text
+    .replace(/(\*\*|__)(.+?)\1/g, "$2")
+    .replace(/(^|[^\w])([*_])(.+?)\2(?=[^\w]|$)/g, "$1$3")
+    .replace(/`([^`]+)`/g, "$1");
 }
 
 export function formatArticleDate(iso: string) {
