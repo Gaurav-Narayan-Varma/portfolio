@@ -96,10 +96,32 @@ const components: Components = {
   ),
 };
 
+type MdNode = { type: string; value?: string; children?: MdNode[] };
+
+/**
+ * HTML collapses runs of spaces, so "Hello.   World" renders with one space.
+ * This turns every extra space in a run into a non-breaking space (the first
+ * stays a normal space so lines can still wrap). Code is left untouched.
+ */
+function remarkPreserveSpaces() {
+  const walk = (node: MdNode) => {
+    if (node.type === "code" || node.type === "inlineCode") return;
+    if (node.type === "text" && node.value) {
+      node.value = node.value.replace(
+        / {2,}/g,
+        (spaces) => " " + "\u00a0".repeat(spaces.length - 1)
+      );
+    }
+    node.children?.forEach(walk);
+  };
+  return (tree: MdNode) => walk(tree);
+}
+
 /** Inline-only markdown (italic, bold, code) for short text like the description. */
 export function InlineMarkdown({ children }: { children: string }) {
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkPreserveSpaces]}
       allowedElements={["p", "em", "strong", "code"]}
       unwrapDisallowed
       components={{
@@ -123,7 +145,10 @@ export function InlineMarkdown({ children }: { children: string }) {
 export default function ArticleMarkdown({ children }: { children: string }) {
   return (
     <div className="description-text !text-[17px] !leading-8 !text-white/70">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkPreserveSpaces]}
+        components={components}
+      >
         {children}
       </ReactMarkdown>
     </div>

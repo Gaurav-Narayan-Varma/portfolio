@@ -1,10 +1,18 @@
 ---
 title: "What's the deal with RocketRide?  The best AI meta-harness"
-description: "We have all heard of AI harnesses, but RocketRide's pitch is that they can do everything the others do and so much more."
+description: "We have all heard of AI harnesses, but RocketRide's pitch is that they can do everything they do, and oh so much more"
 date: 2026-10-16
 category: Meta
-# image: /writing/hello-world.jpg
-image: /writing/exploring-rocketride.jpg
+image: /writing/rocketride/exploring-rocketride.jpg
 ---
 
-Hello world.    I am gaurafv 
+## The state of AI Agent innovation, and where RocketRide fits in
+
+Based on my conversations in San Francisco with fellow technology people, from founders to AI agency operators, I have been getting the impression that AI is more or less stabilizing in H2 of 2026 after going through a burst of rapid development these past couple years.  In March 2025 we saw the rise of MCP and all the magical superpowers they gave AI agents, then later that Fall we saw the explosion of agent skills, also released by Anthropic, and quickly adopted by the rest of the industry.  Alongside the takeoff of MCP and skills we saw huge adoption of Claude Code around the same time and a new term in the AI Agent lexicon: agent harnesses, something which Claude Code is considered.  Then in the Spring we saw the viral takeoff of OpenClaw (100,000 GitHub stars in one week), quickly followed by Big Tech companies attempting to replicate their own 'OpenClaw moment' through their own takes on personal AI agents (X's Grokbot, OpenAI's Dots, Meta's Muses, etc.) - however those launches were more or less just repackaging the tech that already existed, not extending any functionality on their own.  With many saying AI agent innovation is settling down, there is one Company which disagrees, and is making the bet that the technology is still ripe for disruption - enter RocketRide, an AI Agent meta-harness!  
+
+Founded in 2026, RocketRide officially [debuted](https://rocketride.org/blogs/rocket-ride-ai-tools-and-resources) its open-source meta-harness framework in March 2026, where they shared insights on how _the IDE_ is becoming the central work station for AI developers.  This argument is especially bold given the blistering rise of agentic CLI's like Claude Code and [OpenCode](https://opencode.ai/), and of agent GUI's like Codex and Cursor Agents.  RocketRide's bet that IDE's will remain central to the AI developer experience, however, is music to my ears given that I am still an avid user of Cursor and, frankly, also think IDE's for developement are not going away anytime soon.  Since the debut, RocketRide has accrued over [17,000 GitHub stars](https://github.com/rocketride-org/rocketride-server), with thousands of forks and hundreds of pull requests and issues, which all points towards real community enthusiasm (Interestingly I can't seem to find their X account, which certainly could help drive even more community hype!).  But before we dive deeper, what actually is a meta-harness?
+
+## What is a meta-harness?
+
+While RocketRide does not seem to provide a definition of what a meta-harness is based on their [blog content](https://rocketride.org/blog), I did find a [helpful article](https://www.databricks.com/blog/introducing-omnigent-meta-harness-combine-control-and-share-your-agents) from the other meta-harness on the market, [Omniagent](https://github.com/omnigent-ai/omnigent) by Databrinks, which did define the term.  According to them, a meta-harness sits above agent harnesses themselves, like ClaudeCode, Codex, etc., allowing developers to not only create teams of AI agents which span different frameworks, but also do things like craft policies to govern the agents.  The appeal of using a framework to coordinate different agent harnesses makes sense, given some agent harnesses are better than others at certain tasks.  For example, Claude Code is one of the best, if not the best, at coding tasks, while Mastra is great for building personal assistants (personal assistants like GauravGPT which you can find [here](https://gaurav-v.com/chat), apologies in advance for the shameless plug).  Omniagent illustrates the role of a meta-harness in a useful diagram below:
+

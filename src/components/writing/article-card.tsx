@@ -35,7 +35,7 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
       </div>
       <div className="flex flex-1 items-start justify-between gap-4 bg-ds-gray-100 px-4 py-4.5 transition-colors duration-150 group-hover:bg-ds-gray-800">
         <div className="min-w-0">
-          <div className="text-[15px] font-medium leading-[26.25px] -tracking-[0.15px] text-white">
+          <div className="whitespace-pre-wrap text-[15px] font-medium leading-[26.25px] -tracking-[0.15px] text-white">
             {article.title}
           </div>
           <div className="flex items-center gap-2 text-sm font-medium leading-[21px] -tracking-[0.14px] text-white/40">

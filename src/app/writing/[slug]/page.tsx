@@ -106,7 +106,7 @@ export default async function Article({
             </a>
           )}
         </div>
-        <h1 className="page-title !text-[34px] !leading-[42px]">
+        <h1 className="page-title !text-[34px] !leading-[42px] whitespace-pre-wrap">
           {article.title}
         </h1>
         <p className="page-subtitle">
