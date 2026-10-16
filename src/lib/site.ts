@@ -24,7 +24,7 @@ export const SITE_DESCRIPTION =
  * there are posts to show. Set to `true` to add it to the navbar and sitemap
  * and to make the pages reachable again.
  */
-export const SHOW_WRITING = false;
+export const SHOW_WRITING = true;
 
 export const LINKEDIN_URL = "https://www.linkedin.com/in/gaurav-varma";
 export const CAL_URL = "https://cal.com/gaurav-varma-ltovfk/1-1-conversation";

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleMarkdown, { InlineMarkdown } from "@/components/writing/article-markdown";
+import WritingLiveReload from "@/components/writing/writing-live-reload";
 import HorizontalRule from "@/components/projects/horizontal-rule";
 import { SHOW_WRITING, SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
 import {
@@ -67,6 +68,7 @@ export default async function Article({
 
   return (
     <article className="animate-fade-in px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 flex flex-col w-full max-w-[800px] gap-10">
+      <WritingLiveReload />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

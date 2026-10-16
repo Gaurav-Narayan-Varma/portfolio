@@ -4,6 +4,7 @@ description: "And why every portfolio site should have a personalized chat exper
 date: 2026-10-12
 image: /writing/how-gauravgpt-works.jpg
 imageCaption: A woodland salamander crawling
+draft: true
 ---
 
 Have you ever visited a portfolio site, or reviewed a resume, and wished you could just cut to the chase and ask any question about them?  Well, with GauravGPT - the

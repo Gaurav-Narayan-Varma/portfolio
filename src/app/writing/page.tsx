@@ -1,4 +1,5 @@
 import ArticleCard from "@/components/writing/article-card";
+import WritingLiveReload from "@/components/writing/writing-live-reload";
 import { notFound } from "next/navigation";
 import { SHOW_WRITING, pageMetadata } from "@/lib/site";
 import { getAllArticles } from "@/lib/writing";
@@ -16,10 +17,11 @@ export default function Writing() {
 
   return (
     <div className="animate-fade-in px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 flex flex-col w-full max-w-[1200px] gap-14">
+      <WritingLiveReload />
       <div className="flex flex-col gap-3">
         <h1 className="page-title">Writing</h1>
         <p className="page-subtitle">
-          Written 100% by me.
+          Handcrafted thoughts and articles on anything I find interesting.
         </p>
       </div>
 
