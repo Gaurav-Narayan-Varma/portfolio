@@ -1,8 +1,9 @@
 import Link from "next/link";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import ZoomableImage from "./zoomable-image";
 
-/** Long-form typography for articles (server component, no client JS). */
+/** Long-form typography for articles (server component; images are client-side for zoom). */
 const components: Components = {
   h1: ({ children }) => (
     <h2 className="mb-4 mt-12 text-2xl font-medium text-white -tracking-[0.5px] font-[Inter] first:mt-0">
@@ -60,11 +61,9 @@ const components: Components = {
   ),
   hr: () => <hr className="my-10 border-white/[.08]" />,
   img: ({ src, alt }) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
+    <ZoomableImage
       src={typeof src === "string" ? src : undefined}
       alt={alt ?? ""}
-      className="my-8 w-full rounded-lg border border-ds-gray-900"
     />
   ),
   code: ({ children, className }) => (
