@@ -1,0 +1,125 @@
+{
+  "project_id": "8cbca52f-6d85-4269-8fe3-c85511f36fb7",
+  "components": [
+    {
+      "id": "chat_1",
+      "provider": "chat",
+      "name": "Chat",
+      "config": {
+        "hideForm": true,
+        "mode": "Source",
+        "parameters": {},
+        "type": "chat",
+        "name": "Chat"
+      },
+      "ui": {
+        "position": {
+          "x": -140,
+          "y": -10
+        },
+        "measured": {
+          "width": 150,
+          "height": 90
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      }
+    },
+    {
+      "id": "agent_rocketride_1",
+      "provider": "agent_rocketride",
+      "name": "RocketRide Wave",
+      "config": {
+        "agent_description": "",
+        "instructions": [],
+        "max_waves": 10,
+        "require_tool_call": false,
+        "name": "RocketRide Wave"
+      },
+      "ui": {
+        "position": {
+          "x": 90,
+          "y": 130
+        },
+        "measured": {
+          "width": 150,
+          "height": 118
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      },
+      "input": [
+        {
+          "lane": "questions",
+          "from": "chat_1"
+        }
+      ]
+    },
+    {
+      "id": "llm_anthropic_2",
+      "provider": "llm_anthropic",
+      "name": "Anthropic",
+      "config": {
+        "profile": "claude-sonnet-4-6",
+        "claude-sonnet-4-6": {
+          "extendedThinking": false,
+          "apikey": "fghjfghj"
+        },
+        "name": "Anthropic"
+      },
+      "ui": {
+        "position": {
+          "x": 20,
+          "y": 340
+        },
+        "measured": {
+          "width": 150,
+          "height": 68
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      },
+      "control": [
+        {
+          "classType": "llm",
+          "from": "agent_rocketride_1"
+        }
+      ]
+    },
+    {
+      "id": "memory_internal_1",
+      "provider": "memory_internal",
+      "name": "Memory (Internal)",
+      "config": {
+        "type": "memory_internal",
+        "name": "Memory (Internal)"
+      },
+      "ui": {
+        "position": {
+          "x": 185,
+          "y": 288
+        },
+        "measured": {
+          "width": 150,
+          "height": 54
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      },
+      "control": [
+        {
+          "classType": "memory",
+          "from": "agent_rocketride_1"
+        }
+      ]
+    }
+  ],
+  "version": 1,
+  "docRevision": 92,
+  "isLocked": false,
+  "snapToGrid": true,
+  "snapGridSize": [
+    10,
+    10
+  ]
+}
