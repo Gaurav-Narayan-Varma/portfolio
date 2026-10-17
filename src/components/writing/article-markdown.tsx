@@ -1,25 +1,11 @@
 import Link from "next/link";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { extractHeadings } from "@/lib/headings";
 import ZoomableImage from "./zoomable-image";
 
 /** Long-form typography for articles (server component; images are client-side for zoom). */
 const components: Components = {
-  h1: ({ children }) => (
-    <h2 className="mb-4 mt-12 text-2xl font-medium text-white -tracking-[0.5px] font-[Inter] first:mt-0">
-      {children}
-    </h2>
-  ),
-  h2: ({ children }) => (
-    <h2 className="mb-4 mt-12 text-2xl font-medium text-white -tracking-[0.5px] font-[Inter] first:mt-0">
-      {children}
-    </h2>
-  ),
-  h3: ({ children }) => (
-    <h3 className="mb-3 mt-9 text-lg font-medium text-white -tracking-[0.2px] font-[Inter] first:mt-0">
-      {children}
-    </h3>
-  ),
   p: ({ children }) => <p className="my-5 first:mt-0 last:mb-0">{children}</p>,
   ul: ({ children }) => (
     <ul className="my-5 list-disc space-y-2 pl-6 marker:text-white/40">
@@ -141,12 +127,42 @@ export function InlineMarkdown({ children }: { children: string }) {
   );
 }
 
+/**
+ * Headings get ids from `extractHeadings` so the table of contents can link to
+ * them. They render in document order, so we hand the ids out in that order.
+ */
+function headingComponents(ids: string[]): Components {
+  let index = 0;
+  const nextId = () => ids[index++];
+  const h2 = ({ children }: { children?: React.ReactNode }) => (
+    <h2
+      id={nextId()}
+      className="mb-4 mt-12 scroll-mt-24 text-2xl font-medium text-white -tracking-[0.5px] font-[Inter] first:mt-0"
+    >
+      {children}
+    </h2>
+  );
+  return {
+    h1: h2,
+    h2,
+    h3: ({ children }) => (
+      <h3
+        id={nextId()}
+        className="mb-3 mt-9 scroll-mt-24 text-lg font-medium text-white -tracking-[0.2px] font-[Inter] first:mt-0"
+      >
+        {children}
+      </h3>
+    ),
+  };
+}
+
 export default function ArticleMarkdown({ children }: { children: string }) {
+  const ids = extractHeadings(children).map((heading) => heading.id);
   return (
     <div className="description-text !text-[17px] !leading-8 !text-white/70">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkPreserveSpaces]}
-        components={components}
+        components={{ ...components, ...headingComponents(ids) }}
       >
         {children}
       </ReactMarkdown>

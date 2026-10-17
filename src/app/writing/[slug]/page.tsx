@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleMarkdown, { InlineMarkdown } from "@/components/writing/article-markdown";
+import ShareButtons from "@/components/writing/share-buttons";
+import TableOfContents from "@/components/writing/table-of-contents";
 import WritingLiveReload from "@/components/writing/writing-live-reload";
+import { extractHeadings } from "@/lib/headings";
 import HorizontalRule from "@/components/projects/horizontal-rule";
 import { SHOW_WRITING, SITE_NAME, SITE_URL, pageMetadata } from "@/lib/site";
 import {
@@ -56,6 +59,9 @@ export default async function Article({
   const article = SHOW_WRITING ? getArticle(slug) : undefined;
   if (!article) notFound();
 
+  const articleUrl = `${SITE_URL}/writing/${slug}`;
+  const headings = extractHeadings(article.content);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -67,7 +73,7 @@ export default async function Article({
   };
 
   return (
-    <article className="animate-fade-in px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 flex flex-col w-full max-w-[800px] gap-10">
+    <article className="relative animate-fade-in px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 flex flex-col w-full max-w-[800px] gap-10">
       <WritingLiveReload />
       <script
         type="application/ld+json"
@@ -133,6 +139,21 @@ export default async function Article({
       <HorizontalRule />
 
       <ArticleMarkdown>{article.content}</ArticleMarkdown>
+
+      <HorizontalRule />
+
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <span className="text-sm font-medium text-white/50">
+          Enjoyed this? Share it
+        </span>
+        <ShareButtons url={articleUrl} title={article.title} />
+      </div>
+
+      <TableOfContents
+        headings={headings}
+        url={articleUrl}
+        title={article.title}
+      />
     </article>
   );
 }
