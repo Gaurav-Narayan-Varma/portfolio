@@ -3,7 +3,7 @@ title: "What's the deal with RocketRide?  The best AI meta-harness"
 description: "We have all heard of AI agent harnesses, but RocketRide's pitch is that they can do everything they do, and oh so much more"
 date: 2026-10-16
 category: Meta
-image: /writing/rocketride/exploring-rocketride.jpg
+image: /writing/exploring-rocketride.jpg
 ---
 
 ## The state of AI Agent innovation, and where RocketRide fits in
@@ -41,5 +41,4 @@ At this point, I have reached out to the RocketRide team on Discord and hope to 
 ### Conclusion
 
 While my test experience with RocketRide quickstart did not go as hoped, I am pleasantly surprised by the paradigm the RocketRide team takes to the agent experience.  Not having to manually spin up a local server to run your agents, and instead simply just downloading an IDE extension makes the setup super easy.  The IDE-based nature of building agents, i.e. opening up a JSON file and visually defining your agents, is elegant and innovative.  Personally, I am not aware of any other agent framework which uses a multithreaded runtime like C++ for their engine, making RocketRide an excellent choice for users who want the best performance for CPU-heavy workflows.  Fingers crossed the quickstart issue I ran into can be resolved and I can properly finish my review!
-
 
