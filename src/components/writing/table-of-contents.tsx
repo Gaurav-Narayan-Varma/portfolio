@@ -57,6 +57,7 @@ export default function TableOfContents({
     // `relative`), with a sticky inner panel so it follows the reader.
     <aside
       aria-label="Table of contents"
+      data-no-index
       className="absolute bottom-0 left-full top-0 ml-2 hidden w-48 min-[1500px]:block"
     >
       <div className="sticky top-24 flex max-h-[calc(100vh-8rem)] flex-col gap-6 overflow-y-auto">

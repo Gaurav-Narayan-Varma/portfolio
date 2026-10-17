@@ -142,7 +142,10 @@ export default async function Article({
 
       <HorizontalRule />
 
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div
+        data-no-index
+        className="flex flex-wrap items-center justify-between gap-4"
+      >
         <span className="text-sm font-medium text-white/50">
           Enjoyed this? Share it
         </span>

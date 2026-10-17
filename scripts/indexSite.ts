@@ -85,6 +85,8 @@ function htmlToLines(root: HTMLElement): string[] {
     if (!(node instanceof HTMLElement)) return;
     if (SKIP_TAGS.has(node.tagName)) return;
     if (node.getAttribute("aria-hidden") === "true") return;
+    // Opt-out for UI chrome that duplicates content (e.g. article TOC, share row).
+    if (node.hasAttribute("data-no-index")) return;
 
     const isBlock = BLOCK_TAGS.has(node.tagName);
     if (isBlock) flush();
