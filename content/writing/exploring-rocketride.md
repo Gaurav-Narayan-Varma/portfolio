@@ -43,4 +43,3 @@ At this point, I have reached out to the RocketRide team on Discord and hope to 
 While my test experience with RocketRide quickstart did not go as hoped, I am pleasantly surprised by the paradigm the RocketRide team takes to the agent experience.  Not having to manually spin up a local server to run your agents, and instead simply just downloading an IDE extension makes the setup super easy.  The IDE-based nature of building agents, i.e. opening up a JSON file and visually defining your agents, is elegant and innovative.  Personally, I am not aware of any other agent framework which uses a multithreaded runtime like C++ for their engine, making RocketRide an excellent choice for users who want the best performance for CPU-heavy workflows.  Fingers crossed the quickstart issue I ran into can be resolved and I can properly finish my review!
 
 
-Note: wild that entering API key adds it to the pipe file
