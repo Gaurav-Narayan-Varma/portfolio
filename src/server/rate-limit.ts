@@ -103,6 +103,26 @@ export async function consume(
   return { ok: total <= limit, retryAfter };
 }
 
+/**
+ * Atomically claims `key` for `ttlSeconds`. Returns true for the first caller
+ * and false for everyone after, so "do this once" jobs (like emailing a visit
+ * summary) can't double-fire. Needs real Redis: an in-memory fallback would
+ * be per-instance on serverless and quietly allow duplicates, so this throws.
+ */
+export async function claimOnce(key: string, ttlSeconds: number) {
+  const client = getRedis();
+  if (!client) {
+    throw new Error("claimOnce needs Redis (UPSTASH_REDIS_REST_URL/TOKEN)");
+  }
+  const result = await client.set(key, "1", { nx: true, ex: ttlSeconds });
+  return result === "OK";
+}
+
+/** Undoes `claimOnce`, e.g. when the work it guarded failed and should retry. */
+export async function releaseClaim(key: string) {
+  await getRedis()?.del(key);
+}
+
 /** Best-effort client IP. On Vercel these headers are set by the platform. */
 export function getClientIp(headers: Headers): string {
   return (

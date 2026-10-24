@@ -4,6 +4,7 @@ import { ContextSources } from "@/components/chat/context-sources";
 import RotatingQuestions from "@/components/home/rotating-questions";
 import { Markdown } from "@/components/chat/markdown";
 import { ModelPicker } from "@/components/chat/model-picker";
+import { getSessionId } from "@/lib/analytics";
 import { DEFAULT_CHAT_MODEL_ID, findChatModel } from "@/lib/chat-models";
 import { cn } from "@/lib/utils";
 import { ArrowUp, Check, Copy, Sparkles, Square } from "lucide-react";
@@ -102,9 +103,13 @@ export default function ChatPage() {
       abortRef.current = controller;
 
       try {
+        const sessionId = getSessionId();
         const response = await fetch("/api/chat", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            ...(sessionId ? { "x-posthog-session-id": sessionId } : {}),
+          },
           signal: controller.signal,
           body: JSON.stringify({
             model,

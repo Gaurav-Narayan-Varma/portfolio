@@ -9,7 +9,8 @@
  *   `data-track="event_name"` attribute reports a click, e.g.
  *   <a data-track="book_call_clicked" data-track-location="hero">.
  * - Server-side GauravGPT events (src/server/analytics.ts) use a different,
- *   anonymous id, so they aren't linked to these sessions.
+ *   anonymous id, but carry this browser's session id (sent by the chat page)
+ *   so a visit and its questions can be summarised together.
  */
 import posthog from "posthog-js";
 

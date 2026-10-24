@@ -1,0 +1,27 @@
+name: Visitor digest
+
+# Pings the site every 15 minutes so it emails summaries of finished visits
+# (src/server/visitor-digest.ts). Needs two repo settings:
+#   - Secret   CRON_SECRET  (same value as the CRON_SECRET env var on the site)
+#   - Variable SITE_URL     (e.g. https://gaurav-v.com, no trailing slash)
+# Scheduled workflows only run from the default branch, and GitHub pauses them
+# after 60 days without repo activity (re-enable from the Actions tab).
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Send visitor summaries
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          curl --fail --silent --show-error --max-time 90 \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$SITE_URL/api/cron/visitor-digest"

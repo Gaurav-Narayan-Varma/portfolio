@@ -127,8 +127,19 @@ export const chatRoutes = new Hono().post("/", async (c) => {
   const cost = estimateCostMicros(model);
   const day = new Date().toISOString().slice(0, 10);
   const distinctId = visitorId(ip);
+  // Ties these events to the visitor's browser session for the visit summary
+  // email. Still anonymous: it's a random id, not the IP or anything personal.
+  const sessionId = c.req.header("x-posthog-session-id");
+  const session =
+    sessionId && /^[\w-]{16,64}$/.test(sessionId)
+      ? { $session_id: sessionId }
+      : {};
   const blocked = (reason: string) =>
-    track("gauravgpt_blocked", distinctId, { reason, model: model.id });
+    track("gauravgpt_blocked", distinctId, {
+      reason,
+      model: model.id,
+      ...session,
+    });
 
   const burst = await consume(`chat:min:${ip}`, 1, IP_PER_MINUTE, 60);
   if (!burst.ok) {
@@ -278,6 +289,7 @@ export const chatRoutes = new Hono().post("/", async (c) => {
         } finally {
           const actual = await settle(usage, outputChars);
           track("gauravgpt_question", distinctId, {
+            ...session,
             question: last.text,
             model: model.id,
             status,
@@ -303,6 +315,7 @@ export const chatRoutes = new Hono().post("/", async (c) => {
   } catch (error) {
     console.error("Chat completion error:", error);
     track("gauravgpt_question", distinctId, {
+      ...session,
       question: last.text,
       model: model.id,
       status: c.req.raw.signal.aborted ? "aborted" : "error",
