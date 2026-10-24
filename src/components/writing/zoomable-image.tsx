@@ -9,12 +9,18 @@ export default function ZoomableImage({
   alt,
   caption,
   invert = false,
+  cover = false,
 }: {
   src?: string;
   alt: string;
   caption?: string;
   /** Inverts a light image (keeping hues) so it suits the dark site. */
   invert?: boolean;
+  /**
+   * Article header image: cropped to 16:9 with no outer margin (the page lays
+   * it out). The lightbox still shows the full, uncropped image.
+   */
+  cover?: boolean;
 }) {
   const invertClass = invert ? "[filter:invert(1)_hue-rotate(180deg)]" : "";
   const [open, setOpen] = useState(false);
@@ -38,13 +44,13 @@ export default function ZoomableImage({
   return (
     <>
       {/* Spans (not <figure>) because markdown wraps images in a <p>. */}
-      <span className="my-8 block">
+      <span className={cover ? "block" : "my-8 block"}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
           alt={alt}
           onClick={() => setOpen(true)}
-          className={`w-full cursor-zoom-in rounded-lg border border-ds-gray-900 ${invertClass}`}
+          className={`w-full cursor-zoom-in rounded-lg border border-ds-gray-900 ${cover ? "aspect-video object-cover" : ""} ${invertClass}`}
         />
         {caption && (
           <span className="caption-text mt-3 block">{caption}</span>

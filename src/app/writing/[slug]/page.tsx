@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ArticleMarkdown, { InlineMarkdown } from "@/components/writing/article-markdown";
 import ShareButtons from "@/components/writing/share-buttons";
 import TableOfContents from "@/components/writing/table-of-contents";
+import ZoomableImage from "@/components/writing/zoomable-image";
 import WritingLiveReload from "@/components/writing/writing-live-reload";
 import { extractHeadings } from "@/lib/headings";
 import HorizontalRule from "@/components/projects/horizontal-rule";
@@ -135,11 +136,10 @@ export default async function Article({
 
       {article.image && (
         <figure className="flex flex-col gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <ZoomableImage
             src={article.image}
             alt={article.imageCaption ?? article.title}
-            className="w-full rounded-lg border border-ds-gray-900 object-cover aspect-video"
+            cover
           />
           {article.imageCaption && (
             <figcaption className="caption-text">
