@@ -22,6 +22,8 @@ export type ArticleMeta = {
   description: string;
   /** ISO date (YYYY-MM-DD) */
   date: string;
+  /** Optional ISO date (YYYY-MM-DD) of the last meaningful edit */
+  updated?: string;
   category: string;
   /** Optional cover image path (e.g. /writing/my-cover.jpg) */
   image?: string;
@@ -46,6 +48,16 @@ function toIsoDate(value: unknown, file: string): string {
     );
   }
   return date.toISOString().slice(0, 10);
+}
+
+/**
+ * `updated` is optional. It's dropped when it's the same as (or earlier than)
+ * `date`, so the "Updated" label only appears when it adds information.
+ */
+function parseUpdated(value: unknown, date: string, file: string) {
+  if (value === undefined || value === null || value === "") return undefined;
+  const updated = toIsoDate(value, file);
+  return updated > date ? updated : undefined;
 }
 
 function requireString(value: unknown, field: string, file: string): string {
@@ -77,11 +89,14 @@ function parseArticle(file: string): Article | null {
   // `draft: true` keeps a post out of the site while you're writing it.
   if (data.draft === true) return null;
 
+  const date = toIsoDate(data.date, file);
+
   return {
     slug: file.replace(/\.md$/, ""),
     title: requireString(data.title, "title", file),
     description: requireString(data.description, "description", file),
-    date: toIsoDate(data.date, file),
+    date,
+    updated: parseUpdated(data.updated, date, file),
     category: typeof data.category === "string" ? data.category.trim() : "General",
     imageCaption:
       typeof data.imageCaption === "string" && data.imageCaption.trim()

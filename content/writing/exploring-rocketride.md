@@ -2,6 +2,7 @@
 title: "What's the deal with RocketRide?  The best AI meta-harness"
 description: "We have all heard of AI agent harnesses, but RocketRide's pitch is that they can do everything they do, and oh so much more"
 date: 2026-10-16
+updated: 2026-10-24
 category: Meta
 image: /writing/rocketride/exploring-rocketride.jpg
 imageCaption: The Saturn V rocket, the first to carry a human crew to space and land on the moon in 1969
@@ -29,7 +30,7 @@ Following the official [RocketRide quickstart](https://docs.rocketride.org/quick
 
 ![RocketRide node-based visual canvas builder](/writing/rocketride/rocketride-canvas.png "A first look at the RocketRide visual AI builder canvas")
 
-### Building a RAG-based Q&A agent (and the missing node) 
+### Building a basic Q&A agent (and the missing node) 
 
 For my agent, I will go with a RAG-based Q&A agent for answering any question about myself - the build should be relatively straight forward since I have already indexed all my personal information in a Pinecone DB so all that is left is creating the relevant vector database and LLM nodes.  To start off with the LLM node, since RocketRide does not yet have nodes for Vercel AI Gateway or OpenRouter, which is what I would ideally use, I created an Anthropic node and plugged in my API key.  Next I used the native Chat UI to test the chat was working - however I got a broken response on my attempts:
 
@@ -41,7 +42,13 @@ At this point, I have reached out to the RocketRide team on Discord and hope to 
 
 ![The RocketRide team responds to the quickstart bug on Discord](/writing/rocketride/rocketride-discord.png "Resolving the quickstart bug on the RocketRide discord server")
 
-Since RocketRide is open source, including its documentation site, I went ahead and submitted a [pull request](https://github.com/rocketride-org/rocketride-server/pull/2716) to update the quickstart.  After attaching the Return Answers node to the LLM node, we can now successfully chat with our Q&A agent! 
+Since RocketRide is open source, including its documentation site, I went ahead and submitted a [pull request](https://github.com/rocketride-org/rocketride-server/pull/2716) to update the quickstart.  After attaching the Return Answers node to the LLM node, we can now successfully chat with our Q&A agent!  Note: entering your LLM API key into the LLM node, also know it will be saves to the `.pipe` file (see below) - which if you are not careful can get committed to your GitHub repository!  I find it bizarre that the quickstart does not flag this security risk.  After looking through their documentation, RocketRide does not seem to have a workaround for API keys being exposed in the `.pipe` file.  So, if you are collaboratively building RocketRide agents with teammates, developers must remember to remove all their API keys from the `.pipe` file before commiting and pushing their changes to the repo.  This is nothing major, and I am sure better credential management is the roadmap for the RocketRide team - but nevertheless I think it is worth pointing out. 
+
+![Warning: API keys saved to nodes will be exposed in the .pipe file](/writing/rocketride/security-risk.png "Warning: API keys saved to nodes will be exposed in the .pipe file")
+
+### Adding RAG to the agent
+
+
 
 ### Conclusion
 

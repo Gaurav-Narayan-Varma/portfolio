@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           { url: `${SITE_URL}/writing`, lastModified: now, priority: 0.8 },
           ...getInternalArticles().map((a) => ({
             url: `${SITE_URL}/writing/${a.slug}`,
-            lastModified: new Date(a.date),
+            lastModified: new Date(a.updated ?? a.date),
             priority: 0.6,
           })),
         ]

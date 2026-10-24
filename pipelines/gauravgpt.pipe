@@ -1,5 +1,5 @@
 {
-  "project_id": "1c215b39-4754-43ff-bd48-87018a8cbfa8",
+  "project_id": "8cbca52f-6d85-4269-8fe3-c85511f36fb7",
   "components": [
     {
       "id": "chat_1",
@@ -19,15 +19,73 @@
         },
         "measured": {
           "width": 150,
-          "height": 126
+          "height": 140
         },
         "nodeType": "default",
         "formDataValid": true
       }
+    },
+    {
+      "id": "response_answers_1",
+      "provider": "response_answers",
+      "name": "Return Answers",
+      "config": {
+        "laneName": "answers",
+        "name": "Return Answers"
+      },
+      "ui": {
+        "position": {
+          "x": 430,
+          "y": 10
+        },
+        "measured": {
+          "width": 150,
+          "height": 68
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      },
+      "input": [
+        {
+          "lane": "answers",
+          "from": "llm_anthropic_1"
+        }
+      ]
+    },
+    {
+      "id": "llm_anthropic_1",
+      "provider": "llm_anthropic",
+      "name": "Anthropic",
+      "config": {
+        "profile": "claude-sonnet-4-6",
+        "claude-sonnet-4-6": {
+          "extendedThinking": false,
+          "apikey": "${env:ANTHROPIC_API_KEY}"
+        },
+        "name": "Anthropic"
+      },
+      "ui": {
+        "position": {
+          "x": 130,
+          "y": 10
+        },
+        "measured": {
+          "width": 150,
+          "height": 68
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      },
+      "input": [
+        {
+          "lane": "questions",
+          "from": "chat_1"
+        }
+      ]
     }
   ],
   "version": 1,
-  "docRevision": 115,
+  "docRevision": 134,
   "isLocked": false,
   "snapToGrid": true,
   "snapGridSize": [

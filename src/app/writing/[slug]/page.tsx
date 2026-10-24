@@ -45,6 +45,7 @@ export async function generateMetadata({
       ...base.openGraph,
       type: "article",
       publishedTime: article.date,
+      ...(article.updated && { modifiedTime: article.updated }),
       authors: [SITE_NAME],
     },
   };
@@ -68,6 +69,7 @@ export default async function Article({
     headline: article.title,
     description: stripInlineMarkdown(article.description),
     datePublished: article.date,
+    dateModified: article.updated ?? article.date,
     url: `${SITE_URL}/writing/${slug}`,
     author: { "@type": "Person", name: SITE_NAME, url: SITE_URL },
   };
@@ -97,6 +99,17 @@ export default async function Article({
             </span>
           )}
           <time dateTime={article.date}>{formatArticleDate(article.date)}</time>
+          {article.updated && (
+            <>
+              <span>·</span>
+              <span>
+                Updated{" "}
+                <time dateTime={article.updated}>
+                  {formatArticleDate(article.updated)}
+                </time>
+              </span>
+            </>
+          )}
           <span>·</span>
           <span>{article.readingTimeMinutes} min read</span>
           {article.proof && (

@@ -24,6 +24,7 @@ Your article body in markdown...
 | `title`       | yes      |                                                             |
 | `description` | yes      | Subtitle, meta description and social cards. Inline markdown like `_italic_` works in the subtitle (stripped for meta tags) |
 | `date`        | yes      | `YYYY-MM-DD`. Articles are sorted newest first              |
+| `updated`     | no       | `YYYY-MM-DD` of the last meaningful edit. Shows "Updated <date>" on the article page and feeds `dateModified` and the sitemap. Ignored if not later than `date`. Sorting still uses `date` |
 | `category`    | no       | Shown as a tag once `SHOW_CATEGORIES` is turned on in `src/lib/writing.ts` (hidden for now). Defaults to `General` |
 | `image`       | no       | Cover image path, e.g. `/writing/cover.jpg` (file in `public/writing/`). 16:9 works best. Falls back to a placeholder |
 | `imageCaption`| no       | Caption shown below the cover image on the article page (e.g. a photo credit) |

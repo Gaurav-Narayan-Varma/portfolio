@@ -38,8 +38,14 @@ export default function ArticleCard({ article }: { article: ArticleMeta }) {
           <div className="whitespace-pre-wrap text-[15px] font-medium leading-[26.25px] -tracking-[0.15px] text-white">
             {article.title}
           </div>
-          <div className="flex items-center gap-2 text-sm font-medium leading-[21px] -tracking-[0.14px] text-white/40">
+          <div className="flex flex-wrap items-center gap-x-2 text-sm font-medium leading-[21px] -tracking-[0.14px] text-white/40">
             {formatArticleDate(article.date)}
+            {article.updated && (
+              <span>
+                <span aria-hidden className="mr-2">·</span>
+                Updated {formatArticleDate(article.updated)}
+              </span>
+            )}
             {article.externalUrl && (
               <span className="flex items-center gap-0.5 text-white/50">
                 <span aria-hidden className="mr-1.5">·</span>
