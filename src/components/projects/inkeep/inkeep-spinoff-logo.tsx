@@ -10,7 +10,7 @@ export default function InkeepSpinoffLogo() {
       />
 
       <MediaDisplay
-        src="/inkeep-project/inkeep-spinoff-logo.png"
+        src="/projects/inkeep/inkeep-spinoff-logo.png"
         caption="The Open Knowledge logo"
         video={false}
       />

@@ -27,7 +27,7 @@ export default function UserProfileCard({
             Gaurav Varma
           </div>
           <div className="text-white/60 text-sm font-medium leading-[16.8px] -tracking-[0.28px]">
-            Full Stack Engineer
+            Full Stack AI Engineer
           </div>
         </div>
       </div>

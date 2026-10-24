@@ -5,7 +5,7 @@ export const projects: Project[] = [
   {
     name: "Deepground",
     description: "An AI taskforce for small businesses",
-    overviewImage: "/deepground-project/deepground-ov.png",
+    overviewImage: "/projects/deepground/deepground-ov.png",
     logoImage: "/logos/deepground-logo.png",
     slug: "deepground",
     stack: [
@@ -25,7 +25,7 @@ export const projects: Project[] = [
   {
     name: "Inkeep",
     description: "Open source AI agent framework",
-    overviewImage: "/inkeep-project/inkeep-ov.png",
+    overviewImage: "/projects/inkeep/inkeep-ov.png",
     logoImage: "/logos/inkeep-logo.png",
     slug: "inkeep",
     stack: [
@@ -43,7 +43,7 @@ export const projects: Project[] = [
   {
     name: "Clarity",
     description: "Turn meetings into momentum",
-    overviewImage: "/clarity-project/clarity-ov.png",
+    overviewImage: "/projects/clarity/clarity-ov.png",
     logoImage: "/logos/clarity-logo.jpeg",
     slug: "clarity",
     stack: [
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   {
     name: "Feast",
     description: "NYC private dining, delivered",
-    overviewImage: "/feast-project/feast-ov.png",
+    overviewImage: "/projects/feast/feast-ov.png",
     logoImage: "/logos/feast-logo.png",
     slug: "feast",
     stack: [
@@ -82,7 +82,7 @@ export const projects: Project[] = [
   {
     name: "Yhangry Gift Cards",
     description: "Bringing restaurant magic home",
-    overviewImage: "/yhangry-project/yhangry-intro.png",
+    overviewImage: "/projects/yhangry/yhangry-intro.png",
     logoImage: "/logos/yhangry-logo.jpeg",
     slug: "yhangry",
     stack: [

@@ -1,0 +1,37 @@
+{
+  "project_id": "1c215b39-4754-43ff-bd48-87018a8cbfa8",
+  "components": [
+    {
+      "id": "chat_1",
+      "provider": "chat",
+      "name": "Chat",
+      "config": {
+        "hideForm": true,
+        "mode": "Source",
+        "parameters": {},
+        "type": "chat",
+        "name": "Chat"
+      },
+      "ui": {
+        "position": {
+          "x": -140,
+          "y": -10
+        },
+        "measured": {
+          "width": 150,
+          "height": 126
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      }
+    }
+  ],
+  "version": 1,
+  "docRevision": 115,
+  "isLocked": false,
+  "snapToGrid": true,
+  "snapGridSize": [
+    10,
+    10
+  ]
+}

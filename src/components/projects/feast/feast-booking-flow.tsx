@@ -11,19 +11,19 @@ export default function FeastBookingFlow() {
       />
 
       <MediaDisplay
-        src="/feast-project/feast-booking-req.mp4"
+        src="/projects/feast/feast-booking-req.mp4"
         caption="Step 1: Customer requests a booking"
         video={true}
       />
 
       <MediaDisplay
-        src="/feast-project/feast-booking-accept.mp4"
+        src="/projects/feast/feast-booking-accept.mp4"
         caption="Step 2: Chef receives an email notification, and accepts the booking via the dashboard"
         video={true}
       />
 
       <MediaDisplay
-        src="/feast-project/feast-booking-payment.mp4"
+        src="/projects/feast/feast-booking-payment.mp4"
         caption="Step 3: Customer receives an email notification and pays"
         video={true}
       />

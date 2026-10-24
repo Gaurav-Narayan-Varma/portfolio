@@ -15,9 +15,9 @@ export const SITE_URL = (
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Gaurav Varma";
-export const SITE_TITLE = "Gaurav Varma | Full Stack Engineer";
+export const SITE_TITLE = "Gaurav Varma | Full Stack AI Engineer";
 export const SITE_DESCRIPTION =
-  "Gaurav Varma is a full stack engineer in San Francisco who builds products from concept to launch. Explore his case studies, or ask GauravGPT about his work.";
+  "Gaurav Varma is a full stack AI engineer in San Francisco who builds products from concept to launch. Explore his case studies, or ask GauravGPT about his work.";
 
 /**
  * The Writing section (/writing and its articles) is built but hidden until

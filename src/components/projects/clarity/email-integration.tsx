@@ -11,7 +11,7 @@ export default function EmailIntegration() {
       />
 
       <MediaDisplay
-        src="/clarity-project/clarity-emails.png"
+        src="/projects/clarity/clarity-emails.png"
         caption="Emails that write themselves"
         video={false}
       />

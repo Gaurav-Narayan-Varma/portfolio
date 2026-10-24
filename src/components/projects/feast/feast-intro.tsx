@@ -4,7 +4,7 @@ import SectionOverview from "../section-overview";
 export default function FeastIntro() {
   return (
     <>
-      <MediaDisplay src="/feast-project/feast-ov.png" video={false} />
+      <MediaDisplay src="/projects/feast/feast-ov.png" video={false} />
 
       <SectionOverview
         title="Feast"

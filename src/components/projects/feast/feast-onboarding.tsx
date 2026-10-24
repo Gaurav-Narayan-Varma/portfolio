@@ -11,7 +11,7 @@ export default function FeastOnboarding() {
       />
 
       <MediaDisplay
-        src="/feast-project/feast-onboarding.mp4"
+        src="/projects/feast/feast-onboarding.mp4"
         caption="Feast Onboarding Flow"
         video={true}
       />

@@ -11,7 +11,7 @@ export default function Onboarding() {
       />
 
       <MediaDisplay
-        src="/clarity-project/clarity-onboarding.mp4"
+        src="/projects/clarity/clarity-onboarding.mp4"
         caption="Onboarding flow"
         video={true}
       />

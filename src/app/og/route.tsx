@@ -15,7 +15,7 @@ export function GET(req: NextRequest) {
   const title = project ? project.name : "Gaurav Varma";
   const subtitle = project
     ? project.description
-    : "Full stack engineer creating software that matters.";
+    : "Full stack AI engineer creating software that matters.";
   const chips = project
     ? project.stack.slice(0, 5).map((t) => t.name)
     : ["San Francisco", "Full Stack", "AI products"];

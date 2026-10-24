@@ -11,7 +11,7 @@ export default function DeepgroundReception() {
       />
 
       <MediaDisplay
-        src="/deepground-project/deepground-reception.png"
+        src="/projects/deepground/deepground-reception.png"
         caption="Reception Agent booking a job (product preview)"
         video={false}
       />

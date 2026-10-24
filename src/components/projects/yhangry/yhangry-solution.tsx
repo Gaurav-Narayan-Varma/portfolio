@@ -11,7 +11,7 @@ export default function YhangrySolution() {
       />
 
       <MediaDisplay
-        src="/yhangry-project/yhangry-giftcard-flow.mp4"
+        src="/projects/yhangry/yhangry-giftcard-flow.mp4"
         caption="Gift card purchase flow"
         video={true}
       />

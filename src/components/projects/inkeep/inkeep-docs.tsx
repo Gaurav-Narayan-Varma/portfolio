@@ -10,7 +10,7 @@ export default function InkeepDocs() {
       />
 
       <MediaDisplay
-        src="/inkeep-project/inkeep-docs.png"
+        src="/projects/inkeep/inkeep-docs.png"
         caption="docs.inkeep.com"
         video={false}
       />

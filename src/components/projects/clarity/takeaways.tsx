@@ -11,7 +11,7 @@ export default function Takeaways() {
         paragraph3="A heartfelt thank you to our dedicated users – the Claritons. Your innovative spirit and confidence in our platform motivates us to push boundaries and strive for excellence."
       />
       <MediaDisplay
-        src="/clarity-project/bird-rock.png"
+        src="/projects/clarity/bird-rock.png"
         caption="The Clarity team conquering Bird Rock during our San Diego offsite, 2024"
         video={false}
       />

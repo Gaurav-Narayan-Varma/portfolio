@@ -57,7 +57,7 @@ const personJsonLd = {
   "@type": "Person",
   name: SITE_NAME,
   url: SITE_URL,
-  jobTitle: "Full Stack Engineer",
+  jobTitle: "Full Stack AI Engineer",
   description: SITE_DESCRIPTION,
   image: `${SITE_URL}/profile.jpg`,
   address: {

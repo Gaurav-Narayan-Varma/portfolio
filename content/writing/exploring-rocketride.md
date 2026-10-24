@@ -3,7 +3,7 @@ title: "What's the deal with RocketRide?  The best AI meta-harness"
 description: "We have all heard of AI agent harnesses, but RocketRide's pitch is that they can do everything they do, and oh so much more"
 date: 2026-10-16
 category: Meta
-image: /writing/exploring-rocketride.jpg
+image: /writing/rocketride/exploring-rocketride.jpg
 imageCaption: The Saturn V rocket, the first to carry a human crew to space and land on the moon in 1969
 ---
 
@@ -41,7 +41,7 @@ At this point, I have reached out to the RocketRide team on Discord and hope to 
 
 ![The RocketRide team responds to the quickstart bug on Discord](/writing/rocketride/rocketride-discord.png "Resolving the quickstart bug on the RocketRide discord server")
 
-Since RocketRide is open source, including its documentation, I went ahead and submitted a [pull request](https://github.com/rocketride-org/rocketride-server/pull/2716) to update the quickstart.  Now that we have the 
+Since RocketRide is open source, including its documentation site, I went ahead and submitted a [pull request](https://github.com/rocketride-org/rocketride-server/pull/2716) to update the quickstart.  After attaching the Return Answers node to the LLM node, we can now successfully chat with our Q&A agent! 
 
 ### Conclusion
 

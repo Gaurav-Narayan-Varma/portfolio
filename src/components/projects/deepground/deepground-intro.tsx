@@ -4,7 +4,7 @@ import SectionOverview from "@/components/projects/section-overview";
 export default function DeepgroundIntro() {
   return (
     <>
-      <MediaDisplay src="/deepground-project/deepground-ov.png" video={false} />
+      <MediaDisplay src="/projects/deepground/deepground-ov.png" video={false} />
 
       <SectionOverview
         title="Deepground"

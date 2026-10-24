@@ -4,7 +4,7 @@ import SectionOverview from "@/components/projects/section-overview";
 export default function ClarityIntro() {
   return (
     <>
-      <MediaDisplay src="/clarity-project/clarity-ov.png" video={false} />
+      <MediaDisplay src="/projects/clarity/clarity-ov.png" video={false} />
 
       <SectionOverview
         title="Clarity"

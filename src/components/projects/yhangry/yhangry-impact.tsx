@@ -11,7 +11,7 @@ export default function YhangryImpact() {
       />
 
       <MediaDisplay
-        src="/yhangry-project/yhangry-impact.png"
+        src="/projects/yhangry/yhangry-impact.png"
         caption="Launch metrics!"
         video={false}
       />

@@ -4,7 +4,7 @@ import SectionOverview from "@/components/projects/section-overview";
 export default function InkeepIntro() {
   return (
     <>
-      <MediaDisplay src="/inkeep-project/inkeep-ov.png" video={false} />
+      <MediaDisplay src="/projects/inkeep/inkeep-ov.png" video={false} />
 
       <SectionOverview
         title="Inkeep"

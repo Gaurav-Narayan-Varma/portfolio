@@ -11,7 +11,7 @@ export default function DeepgroundTaskforce() {
       />
 
       <MediaDisplay
-        src="/deepground-project/deepground-taskforce.png"
+        src="/projects/deepground/deepground-taskforce.png"
         caption="Meet the team that would work for you"
         video={false}
       />

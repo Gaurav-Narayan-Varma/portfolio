@@ -11,7 +11,7 @@ export default function InkeepCommunity() {
       />
 
       <MediaDisplay
-        src="/inkeep-project/inkeep-github.png"
+        src="/projects/inkeep/inkeep-github.png"
         caption="The open source agent framework on GitHub"
         video={false}
       />

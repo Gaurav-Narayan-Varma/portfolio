@@ -11,13 +11,13 @@ export default function MeetingTimeline() {
       />
 
       <MediaDisplay
-        src="/clarity-project/clarity-calendar.mp4"
+        src="/projects/clarity/clarity-calendar.mp4"
         caption="Integrated calendar view"
         video={true}
       />
 
       <MediaDisplay
-        src="/clarity-project/home-page-redesign.mp4"
+        src="/projects/clarity/home-page-redesign.mp4"
         caption="Single unified meeting timeline"
         video={true}
       />

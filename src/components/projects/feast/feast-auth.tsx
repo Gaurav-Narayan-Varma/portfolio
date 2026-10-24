@@ -11,7 +11,7 @@ export default function FeastAuth() {
       />
 
       <MediaDisplay
-        src="/feast-project/feast-auth.mp4"
+        src="/projects/feast/feast-auth.mp4"
         caption="Feast Authentication Flow"
         video={true}
       />

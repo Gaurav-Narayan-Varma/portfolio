@@ -10,7 +10,7 @@ export default function FeastAdmin() {
       />
 
       <MediaDisplay
-        src="/feast-project/feast-admin.png"
+        src="/projects/feast/feast-admin.png"
         caption="Feast Admin Dashboard"
         video={false}
       />

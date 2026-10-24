@@ -10,7 +10,7 @@ export default function FeastGrowth() {
       />
 
       <MediaDisplay
-        src="/feast-project/feast-growth.png"
+        src="/projects/feast/feast-growth.png"
         caption="Product expansion led by my efforts"
         video={false}
       />

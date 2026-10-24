@@ -11,7 +11,7 @@ export default function DeepgroundGrader() {
       />
 
       <MediaDisplay
-        src="/deepground-project/deepground-grader.png"
+        src="/projects/deepground/deepground-grader.png"
         caption="A report built from a sample business"
         video={false}
       />

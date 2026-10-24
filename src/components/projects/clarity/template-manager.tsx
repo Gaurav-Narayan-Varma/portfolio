@@ -11,7 +11,7 @@ export default function TemplateManager() {
       />
 
       <MediaDisplay
-        src="/clarity-project/clarity-template-manager.mp4"
+        src="/projects/clarity/clarity-template-manager.mp4"
         caption="Create and categorize cross-workspace templates"
         video={true}
       />

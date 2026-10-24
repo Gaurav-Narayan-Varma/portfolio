@@ -24,7 +24,7 @@ export default function IntroSection() {
             I build software products from zero to one.
           </div>
           <div className="description-text">
-            I&apos;m Gaurav, a full stack engineer in San Francisco. At Clarity
+            I&apos;m Gaurav, a full stack AI engineer in San Francisco. At Clarity
             I was a founding engineer on an AI meeting notes app that Cursor
             went on to acquire. At Inkeep I grew an open source agent framework
             past 1,000 GitHub stars. Today I&apos;m prototyping Deepground, an
