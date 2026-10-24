@@ -4,6 +4,7 @@ description: "We have all heard of AI agent harnesses, but RocketRide's pitch is
 date: 2026-10-16
 category: Meta
 image: /writing/exploring-rocketride.jpg
+imageCaption: The Saturn V rocket, the first to carry a human crew to space and land on the moon in 1969
 ---
 
 ## The state of AI Agent innovation, and where RocketRide fits in
@@ -16,7 +17,7 @@ Founded in 2026, RocketRide officially [debuted](https://rocketride.org/blogs/ro
 
 While RocketRide does not seem to provide a definition of what a meta-harness is based on their [blog content](https://rocketride.org/blog), I did find a [helpful article](https://www.databricks.com/blog/introducing-omnigent-meta-harness-combine-control-and-share-your-agents) from the other big meta-harness in the market, [Omniagent](https://github.com/omnigent-ai/omnigent) by Databriks, which did define the term.  According to them, a meta-harness sits above agent harnesses themselves, like ClaudeCode, Codex, etc., allowing developers to not only create teams of AI agents which span different frameworks, but also do things like craft policies to govern those agents.  The appeal of using a framework to coordinate different agent harnesses makes sense, given some agent harnesses are better than others at certain tasks.  For example, Claude Code is one of the best, if not the best, at coding tasks, while Mastra is great for building personal assistants (personal assistants like GauravGPT which you can find [here](https://gaurav-v.com/chat), apologies in advance for the shameless plug).  While the below diagram depicts Omniagent's architecture, I think it does a great job of also capturing the essence of meta-harness functionality.
 
-![Meta-harness architecture, specifically implemented by Omniagent](/writing/rocketride/agent-harness-diagram.png)
+![Meta-harness architecture, specifically implemented by Omniagent](/writing/rocketride/agent-harness-diagram.png#dark "Omniagent's meta-harness architecture (source: Databricks)")
 
 With a working definition of meta-harnesses out of the way, let's dive right into the agent experience by building our own agent and hopefully discovering some of the awesome benefits that IDE-driven agent developement has to offer.
 
@@ -26,17 +27,21 @@ With a working definition of meta-harnesses out of the way, let's dive right int
 
 Following the official [RocketRide quickstart](https://docs.rocketride.org/quickstart/ide-walkthrough), I went ahead and installed the RocketRide extension in Cursor.  Next, I created a `.pipe` file, which under the hood is JSON - upon opening the file, the RocketRide extension displays it as a visual builder canvas where users can drag and drop nodes (see below).  The agent building experience is reminiscent of n8n, which also features a node-based visual builder canvas - the main differences appear to be that with RocketRide you open the canvas directly in your IDE vs JSON files rather than having to manage a separate browser window.  Additionally, while the n8n engine is base on Node.js which is famously single threaded, RocketRide is based on a C++ engine which is multi-threaded and can therefore run parallelize CPU-heavy tasks - which should be incredibly helpful for AI workflows! 
 
-![RocketRide node-based visual canvas builder](/writing/rocketride/rocketride-canvas.png)
+![RocketRide node-based visual canvas builder](/writing/rocketride/rocketride-canvas.png "A first look at the RocketRide visual AI builder canvas")
 
 ### Building a RAG-based Q&A agent (and the missing node) 
 
 For my agent, I will go with a RAG-based Q&A agent for answering any question about myself - the build should be relatively straight forward since I have already indexed all my personal information in a Pinecone DB so all that is left is creating the relevant vector database and LLM nodes.  To start off with the LLM node, since RocketRide does not yet have nodes for Vercel AI Gateway or OpenRouter, which is what I would ideally use, I created an Anthropic node and plugged in my API key.  Next I used the native Chat UI to test the chat was working - however I got a broken response on my attempts:
 
-![Broken chat node](/writing/rocketride/rocketride-broken-chat.png)
+![Broken chat node](/writing/rocketride/rocketride-broken-chat.png "The quickstart documentation had a bug - which we thankfully fixed")
 
 The error output is confusing, given the [quickstart](https://docs.rocketride.org/quickstart/ide-walkthrough) said that upon linking the LLM node to the chat node, "the LLM's response routes back to the chat interface automatically."  I am not sure if I am missing anything here.  Side note: I noticed RocketRide's documentation does not have an AskAI feature, would would be very helpful for cases like these!  Additionally, a video tutorial on the quickstart page would also be helpful to make sure I am following all the steps correctly.
 
-At this point, I have reached out to the RocketRide team on Discord and hope to resolve the issue.  Until then, consider this section unfinished!
+At this point, I have reached out to the RocketRide team on Discord and hope to resolve the issue.  Update:  great news - the RocketRide team helped resolve the issue!  According to [Mithilesh](https://www.linkedin.com/in/mithilesh-gaurihar/), an AI Engineer at RocketRide, to get the chat working users need to attach a Return Answers node to the LLM node - which the quickstart fails to mention.  
+
+![The RocketRide team responds to the quickstart bug on Discord](/writing/rocketride/rocketride-discord.png "Resolving the quickstart bug on the RocketRide discord server")
+
+Since RocketRide is open source, including its documentation, I went ahead and submitted a [pull request](https://github.com/rocketride-org/rocketride-server/pull/2716) to update the quickstart.  Now that we have the 
 
 ### Conclusion
 

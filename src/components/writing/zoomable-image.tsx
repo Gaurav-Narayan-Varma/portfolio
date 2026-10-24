@@ -7,10 +7,16 @@ import { createPortal } from "react-dom";
 export default function ZoomableImage({
   src,
   alt,
+  caption,
+  invert = false,
 }: {
   src?: string;
   alt: string;
+  caption?: string;
+  /** Inverts a light image (keeping hues) so it suits the dark site. */
+  invert?: boolean;
 }) {
+  const invertClass = invert ? "[filter:invert(1)_hue-rotate(180deg)]" : "";
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -31,13 +37,19 @@ export default function ZoomableImage({
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        onClick={() => setOpen(true)}
-        className="my-8 w-full cursor-zoom-in rounded-lg border border-ds-gray-900"
-      />
+      {/* Spans (not <figure>) because markdown wraps images in a <p>. */}
+      <span className="my-8 block">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          onClick={() => setOpen(true)}
+          className={`w-full cursor-zoom-in rounded-lg border border-ds-gray-900 ${invertClass}`}
+        />
+        {caption && (
+          <span className="caption-text mt-3 block">{caption}</span>
+        )}
+      </span>
       {open &&
         createPortal(
           <div
@@ -59,7 +71,7 @@ export default function ZoomableImage({
             <img
               src={src}
               alt={alt}
-              className="max-h-full max-w-full rounded-lg object-contain"
+              className={`max-h-full max-w-full rounded-lg object-contain ${invertClass}`}
             />
           </div>,
           document.body

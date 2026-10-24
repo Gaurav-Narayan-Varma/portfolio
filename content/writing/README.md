@@ -32,6 +32,12 @@ Your article body in markdown...
 | `source`      | no       | Publication name shown on an external card, e.g. `Financial Times` |
 | `draft`       | no       | `true` hides the article from the site, list and sitemap    |
 
+Add a caption under an in-article image with the markdown image title:
+`![Alt text](/writing/my-image.png "Caption shown below the image")`.
+
+For a light/white image that clashes with the dark site, add `#dark` to the
+path to invert it (hues preserved): `![Alt](/writing/diagram.png#dark "Caption")`.
+
 Supported markdown: headings (`##`, `###`), lists, links, images (put files in
 `public/` and reference them as `/writing/my-image.png`), blockquotes, code
 blocks, tables and other GitHub-flavored markdown. Use `##` for section

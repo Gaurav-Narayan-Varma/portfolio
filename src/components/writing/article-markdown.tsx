@@ -46,12 +46,20 @@ const components: Components = {
     </blockquote>
   ),
   hr: () => <hr className="my-10 border-white/[.08]" />,
-  img: ({ src, alt }) => (
-    <ZoomableImage
-      src={typeof src === "string" ? src : undefined}
-      alt={alt ?? ""}
-    />
-  ),
+  // `![alt](src "Caption")` -> the quoted title is shown as a caption.
+  // `![alt](/path.png#dark)` -> light image is inverted to fit the dark site.
+  img: ({ src, alt, title }) => {
+    const rawSrc = typeof src === "string" ? src : undefined;
+    const invert = rawSrc?.endsWith("#dark") ?? false;
+    return (
+      <ZoomableImage
+        src={invert ? rawSrc?.slice(0, -"#dark".length) : rawSrc}
+        alt={alt ?? ""}
+        caption={title}
+        invert={invert}
+      />
+    );
+  },
   code: ({ children, className }) => (
     <code
       className={`rounded-md bg-white/10 px-1.5 py-0.5 font-mono text-[0.85em] text-white/90 ${className ?? ""}`}
