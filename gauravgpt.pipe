@@ -1,5 +1,5 @@
 {
-  "project_id": "590fb268-c6fc-45ad-be6d-62f174569e98",
+  "project_id": "8cbca52f-6d85-4269-8fe3-c85511f36fb7",
   "components": [
     {
       "id": "chat_1",
@@ -19,31 +19,59 @@
         },
         "measured": {
           "width": 150,
-          "height": 90
+          "height": 68
         },
         "nodeType": "default",
         "formDataValid": true
       }
     },
     {
-      "id": "agent_rocketride_1",
-      "provider": "agent_rocketride",
-      "name": "RocketRide Wave",
+      "id": "response_answers_1",
+      "provider": "response_answers",
+      "name": "Return Answers",
       "config": {
-        "agent_description": "",
-        "instructions": [],
-        "max_waves": 10,
-        "require_tool_call": false,
-        "name": "RocketRide Wave"
+        "laneName": "answers",
+        "name": "Return Answers"
       },
       "ui": {
         "position": {
-          "x": 90,
-          "y": 130
+          "x": 210,
+          "y": 0
         },
         "measured": {
           "width": 150,
-          "height": 118
+          "height": 68
+        },
+        "nodeType": "default",
+        "formDataValid": true
+      },
+      "input": [
+        {
+          "lane": "answers",
+          "from": "llm_anthropic_1"
+        }
+      ]
+    },
+    {
+      "id": "llm_anthropic_1",
+      "provider": "llm_anthropic",
+      "name": "Anthropic",
+      "config": {
+        "profile": "claude-sonnet-4-6",
+        "claude-sonnet-4-6": {
+          "extendedThinking": false,
+          "apikey": "${ROCKETRIDE_ANTHROPIC_KEY}"
+        },
+        "name": "Anthropic"
+      },
+      "ui": {
+        "position": {
+          "x": 40,
+          "y": -40
+        },
+        "measured": {
+          "width": 150,
+          "height": 68
         },
         "nodeType": "default",
         "formDataValid": true
@@ -54,68 +82,10 @@
           "from": "chat_1"
         }
       ]
-    },
-    {
-      "id": "llm_anthropic_2",
-      "provider": "llm_anthropic",
-      "name": "Anthropic",
-      "config": {
-        "profile": "claude-sonnet-4-6",
-        "claude-sonnet-4-6": {
-          "extendedThinking": false,
-          "apikey": "fghjfghj"
-        },
-        "name": "Anthropic"
-      },
-      "ui": {
-        "position": {
-          "x": 20,
-          "y": 340
-        },
-        "measured": {
-          "width": 150,
-          "height": 68
-        },
-        "nodeType": "default",
-        "formDataValid": true
-      },
-      "control": [
-        {
-          "classType": "llm",
-          "from": "agent_rocketride_1"
-        }
-      ]
-    },
-    {
-      "id": "memory_internal_1",
-      "provider": "memory_internal",
-      "name": "Memory (Internal)",
-      "config": {
-        "type": "memory_internal",
-        "name": "Memory (Internal)"
-      },
-      "ui": {
-        "position": {
-          "x": 185,
-          "y": 288
-        },
-        "measured": {
-          "width": 150,
-          "height": 54
-        },
-        "nodeType": "default",
-        "formDataValid": true
-      },
-      "control": [
-        {
-          "classType": "memory",
-          "from": "agent_rocketride_1"
-        }
-      ]
     }
   ],
   "version": 1,
-  "docRevision": 92,
+  "docRevision": 110,
   "isLocked": false,
   "snapToGrid": true,
   "snapGridSize": [

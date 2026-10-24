@@ -28,7 +28,7 @@ Following the official [RocketRide quickstart](https://docs.rocketride.org/quick
 
 ![RocketRide node-based visual canvas builder](/writing/rocketride/rocketride-canvas.png)
 
-### Attempting to create a RAG-based Q&A agent (and failing) 
+### Building a RAG-based Q&A agent (and the missing node) 
 
 For my agent, I will go with a RAG-based Q&A agent for answering any question about myself - the build should be relatively straight forward since I have already indexed all my personal information in a Pinecone DB so all that is left is creating the relevant vector database and LLM nodes.  To start off with the LLM node, since RocketRide does not yet have nodes for Vercel AI Gateway or OpenRouter, which is what I would ideally use, I created an Anthropic node and plugged in my API key.  Next I used the native Chat UI to test the chat was working - however I got a broken response on my attempts:
 
