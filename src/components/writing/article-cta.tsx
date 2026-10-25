@@ -17,7 +17,6 @@ const SHOW_AFTER_PX = { article: 270, project: 280 } as const;
  * the end of the page body.
  */
 const START_FILL = { article: 0.2, project: 0.15 } as const;
-const HEADLINE = "Interested in building with Gaurav?";
 
 /**
  * Call to action for long pages (articles and project pages), in two forms:
@@ -126,16 +125,13 @@ export default function ArticleCta({
       <section
         ref={sectionRef}
         data-no-index
-        className="flex flex-col gap-6 rounded-2xl border border-emerald-400/25 bg-gradient-to-b from-emerald-600/10 to-ds-gray-100 p-6 sm:p-8"
+        className="mt-6 flex flex-col gap-6 rounded-2xl border border-emerald-400/25 bg-gradient-to-b from-emerald-600/10 to-ds-gray-100 p-6 sm:p-8"
       >
         <div className="flex flex-col gap-3">
-          <div className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-emerald-400">
+          <h2 className="font-mono text-base font-medium uppercase tracking-[0.15em] text-emerald-400">
             Work with me
-          </div>
-          <h2 className="font-[Inter] text-[28px] font-medium leading-9 -tracking-[0.4px] text-white">
-            {HEADLINE}
           </h2>
-          <p className="text-[15px] leading-6 text-white/60">
+          <p className="text-sm leading-6 text-white/60">
             I build AI software products from zero to one. Book a call or send me
             a message and tell me what you&apos;re working on.
           </p>
