@@ -46,6 +46,6 @@ Since RocketRide is open source, including its documentation site, I went ahead 
 
 ![Warning: API keys saved to nodes will be exposed in the .pipe file](/writing/rocketride/security-risk.png "Warning: API keys saved to nodes will be exposed in the .pipe file")
 
-### Conclusion
+## Conclusion
 
 While the quickstart was initially rocky, I am pleasantly surprised by the paradigm the RocketRide team takes to the agent experience.  Not having to manually spin up a local server to run your agents, and instead simply just downloading an IDE extension makes the setup super easy.  The IDE-based nature of building agents, i.e. opening up a JSON file and visually defining your agents, is elegant and innovative.  Personally, I am not aware of any other agent framework which uses a multithreaded runtime like C++ for their engine, making RocketRide an excellent choice for users who want the best performance for CPU-heavy workflows.  For teams deploying AI agents in production in 2026 RocketRide is definitely worth a try!

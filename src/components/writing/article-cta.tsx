@@ -108,7 +108,7 @@ export default function ArticleCta({
             className="pointer-events-none absolute inset-0 rounded-[27px] border-t-2 border-emerald-400/80"
             style={{ clipPath: `inset(0 ${(1 - fill) * 100}% 0 0)` }}
           />
-          <div className="flex items-center gap-3 pb-3 pl-6 pr-5 pt-4 sm:gap-6 sm:pb-4 sm:pl-8 sm:pr-8 sm:pt-5">
+          <div className="flex items-center gap-3 pb-3 pl-6 pr-4 pt-4 sm:gap-6 sm:pb-3.5 sm:pl-8 sm:pr-6 sm:pt-4">
             <div className="min-w-0 flex-1 truncate text-sm font-medium text-white/80 sm:text-[15px]">
               Build with Gaurav
             </div>
@@ -120,7 +120,7 @@ export default function ArticleCta({
               onClick={() => {
                 setDismissed(true);
               }}
-              className="ml-1 cursor-default rounded-md p-1 text-white/40 transition-colors duration-150 hover:text-white/80"
+              className="-ml-1 cursor-default rounded-md p-1 text-white/40 sm:-ml-3 transition-colors duration-150 hover:text-white/80"
             >
               <X className="h-4 w-4" />
             </button>
