@@ -1,6 +1,6 @@
 # Gaurav Varma's portfolio
 
-Source for [gaurav-v.com](https://gaurav-v.com): case studies, writing, and **GauravGPT**, a chat assistant that answers questions about me from this site and my resume.
+Source for [gaurav-v.com](https://gaurav-v.com): case studies, writing, and **GauravGPT**, a chat AI agent that answers questions about me from this site and my resume.
 
 **Stack:** Next.js 15, Tailwind 4, Hono, Pinecone (retrieval), Vercel AI Gateway (LLM), PostHog, Resend, Upstash Redis.
 

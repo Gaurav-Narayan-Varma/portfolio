@@ -21,7 +21,7 @@ export default function IntroSection() {
         </figure>
         <div className="flex flex-col gap-5 lg:flex-1 lg:order-1">
           <div className="font-[Inter] text-4xl font-medium flex flex-col gap-1 -tracking-[0.72px] leading-[45px]">
-            I build software products from zero to one.
+            I build AI software products from zero to one.
           </div>
           <div className="description-text">
             I&apos;m Gaurav, a full stack AI engineer in San Francisco. At Clarity
@@ -40,7 +40,7 @@ export default function IntroSection() {
             <ContextSources align="start" />
           </div>
           <div className="pt-3">
-            <ContactMe location="hero" showRepo />
+            <ContactMe location="hero" />
           </div>
         </div>
       </div>
