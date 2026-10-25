@@ -19,6 +19,12 @@ const SHOW_AFTER_PX = { article: 270, project: 280 } as const;
 const START_FILL = { article: 0.2, project: 0.15 } as const;
 
 /**
+ * Space above the bottom section's text, per kind of page (on top of the page's
+ * own gap). Articles sit closer to their last paragraph than project pages.
+ */
+const SECTION_SPACING = { article: "mt-0 pt-12", project: "mt-6 pt-20" } as const;
+
+/**
  * Call to action for long pages (articles and project pages), in two forms:
  *  - a floating bar that slides in once the reader has scrolled a set number
  *    of pixels, with a progress line along its top edge that tracks
@@ -129,18 +135,18 @@ export default function ArticleCta({
       <section
         ref={sectionRef}
         data-no-index
-        className="-mb-18 -mx-5 mt-6 flex flex-col items-center gap-6 bg-[radial-gradient(ellipse_at_bottom,rgba(16,185,129,0.2),transparent_65%)] px-5 pb-18 pt-20 text-center md:-mx-10 md:px-10 lg:-mx-12 lg:px-12"
+        className={`-mb-18 -mx-5 flex flex-col gap-6 bg-[radial-gradient(ellipse_at_bottom,rgba(16,185,129,0.2),transparent_65%)] px-5 pb-18 md:-mx-10 md:px-10 lg:-mx-12 lg:px-12 ${SECTION_SPACING[source]}`}
       >
         <div className="flex max-w-md flex-col gap-3">
           <h2 className="font-mono text-base font-medium uppercase tracking-[0.15em] text-emerald-400">
             Work with me
           </h2>
           <p className="text-sm leading-6 text-white/60">
-            I build AI software products from zero to one. Book a call or send me
+            I build AI software products from zero to one.  Book a call or send me
             a message and tell me what you&apos;re working on.
           </p>
         </div>
-        <ContactMe location={`${source}_footer`} className="justify-center" />
+        <ContactMe location={`${source}_footer`} />
       </section>
     </>
   );
