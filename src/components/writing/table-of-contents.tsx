@@ -9,7 +9,9 @@ const ACTIVE_OFFSET = 140;
 
 /**
  * Floating "On this page" nav pinned to the right of the article. Only shown
- * when the viewport has room for it beside the article column.
+ * when the viewport has room for it beside the article column. It widens as
+ * the viewport allows (192 -> 224 -> 256px) so section names wrap to two lines
+ * at most.
  */
 export default function TableOfContents({
   headings,
@@ -58,7 +60,7 @@ export default function TableOfContents({
     <aside
       aria-label="Table of contents"
       data-no-index
-      className="absolute bottom-0 left-full top-0 ml-2 hidden w-48 min-[1500px]:block"
+      className="absolute bottom-0 left-full top-0 ml-2 hidden w-48 min-[1500px]:block min-[1560px]:w-56 min-[1640px]:w-64"
     >
       <div className="sticky top-24 flex max-h-[calc(100vh-8rem)] flex-col gap-6 overflow-y-auto">
       <nav className="flex flex-col gap-3">
