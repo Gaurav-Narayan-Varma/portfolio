@@ -32,7 +32,7 @@ Following the official [RocketRide quickstart](https://docs.rocketride.org/quick
 
 ### Building a basic Q&A agent (and the missing node) 
 
-For my agent, I will go with a RAG-based Q&A agent for answering any question about myself - the build should be relatively straight forward since I have already indexed all my personal information in a Pinecone DB so all that is left is creating the relevant vector database and LLM nodes.  To start off with the LLM node, since RocketRide does not yet have nodes for Vercel AI Gateway or OpenRouter, which is what I would ideally use, I created an Anthropic node and plugged in my API key.  Next I used the native Chat UI to test the chat was working - however I got a broken response on my attempts:
+For my agent, I will go with a simple Q&A agent for answering basic questions.  To start off with the LLM node, since RocketRide does not yet have nodes for Vercel AI Gateway or OpenRouter, which is what I would ideally use, I created an Anthropic node and plugged in my API key.  Next I used the native Chat UI to test the chat was working - however I got a broken response on my attempts:
 
 ![Broken chat node](/writing/rocketride/rocketride-broken-chat.png "The quickstart documentation had a bug - which we thankfully fixed")
 
@@ -46,11 +46,6 @@ Since RocketRide is open source, including its documentation site, I went ahead 
 
 ![Warning: API keys saved to nodes will be exposed in the .pipe file](/writing/rocketride/security-risk.png "Warning: API keys saved to nodes will be exposed in the .pipe file")
 
-### Adding RAG to the agent
-
-
-
 ### Conclusion
 
-While my test experience with RocketRide quickstart did not go as hoped, I am pleasantly surprised by the paradigm the RocketRide team takes to the agent experience.  Not having to manually spin up a local server to run your agents, and instead simply just downloading an IDE extension makes the setup super easy.  The IDE-based nature of building agents, i.e. opening up a JSON file and visually defining your agents, is elegant and innovative.  Personally, I am not aware of any other agent framework which uses a multithreaded runtime like C++ for their engine, making RocketRide an excellent choice for users who want the best performance for CPU-heavy workflows.  Fingers crossed the quickstart issue I ran into can be resolved and I can properly finish my review!
-
+While the quickstart was initially rocky, I am pleasantly surprised by the paradigm the RocketRide team takes to the agent experience.  Not having to manually spin up a local server to run your agents, and instead simply just downloading an IDE extension makes the setup super easy.  The IDE-based nature of building agents, i.e. opening up a JSON file and visually defining your agents, is elegant and innovative.  Personally, I am not aware of any other agent framework which uses a multithreaded runtime like C++ for their engine, making RocketRide an excellent choice for users who want the best performance for CPU-heavy workflows.  For teams deploying AI agents in production in 2026 RocketRide is definitely worth a try!

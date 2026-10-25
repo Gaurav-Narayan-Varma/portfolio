@@ -14,12 +14,12 @@
       },
       "ui": {
         "position": {
-          "x": -140,
-          "y": -10
+          "x": -310,
+          "y": -20
         },
         "measured": {
           "width": 150,
-          "height": 140
+          "height": 129
         },
         "nodeType": "default",
         "formDataValid": true
@@ -35,8 +35,8 @@
       },
       "ui": {
         "position": {
-          "x": 430,
-          "y": 10
+          "x": 130,
+          "y": 70
         },
         "measured": {
           "width": 150,
@@ -60,14 +60,14 @@
         "profile": "claude-sonnet-4-6",
         "claude-sonnet-4-6": {
           "extendedThinking": false,
-          "apikey": "${env:ANTHROPIC_API_KEY}"
+          "apikey": "${ROCKETRIDE_ANTHROPIC_KEY}"
         },
         "name": "Anthropic"
       },
       "ui": {
         "position": {
-          "x": 130,
-          "y": 10
+          "x": -80,
+          "y": -10
         },
         "measured": {
           "width": 150,
@@ -85,7 +85,7 @@
     }
   ],
   "version": 1,
-  "docRevision": 134,
+  "docRevision": 173,
   "isLocked": false,
   "snapToGrid": true,
   "snapGridSize": [
