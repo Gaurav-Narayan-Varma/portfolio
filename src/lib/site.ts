@@ -27,6 +27,8 @@ export const SITE_DESCRIPTION =
 export const SHOW_WRITING = true;
 
 export const LINKEDIN_URL = "https://www.linkedin.com/in/gaurav-varma";
+/** This site's source code, linked from the home page hero. */
+export const REPO_URL = "https://github.com/Gaurav-Narayan-Varma/portfolio";
 export const CAL_URL = "https://cal.com/gaurav-varma-ltovfk/1-1-conversation";
 
 /** Path of the generated social card. `slug` selects a project card. */

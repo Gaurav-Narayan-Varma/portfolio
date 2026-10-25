@@ -65,7 +65,7 @@ export default function JourneySection() {
           My Journey
         </div>
         <div className="text-white text-base leading-7 -tracking-[0.16] font-medium">
-          I started in economics at{" "}
+          I started in Economics at{" "}
           <a
             className="hyperlink"
             href="https://home.dartmouth.edu"

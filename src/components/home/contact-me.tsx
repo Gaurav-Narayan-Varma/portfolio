@@ -1,5 +1,5 @@
-import { CAL_URL } from "@/lib/site";
-import { CalendarDays, MessageSquare } from "lucide-react";
+import { CAL_URL, REPO_URL } from "@/lib/site";
+import { CalendarDays, Github, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 const buttonClass =
@@ -7,8 +7,17 @@ const buttonClass =
 const labelClass =
   "text-[15px] font-medium text-white/80 group-hover:text-white transition-colors duration-150 leading-[26.25px] -tracking-[0.15px]";
 
-/** Cal.com booking link + contact form, side by side. */
-export default function ContactMe({ location }: { location: string }) {
+/**
+ * Cal.com booking link + contact form, side by side. `showRepo` adds a
+ * "See repo" link to this site's source (used in the hero).
+ */
+export default function ContactMe({
+  location,
+  showRepo = false,
+}: {
+  location: string;
+  showRepo?: boolean;
+}) {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <a
@@ -35,6 +44,21 @@ export default function ContactMe({ location }: { location: string }) {
           <div className={labelClass}>Message me</div>
         </div>
       </Link>
+      {showRepo && (
+        <a
+          href={REPO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-default max-w-fit"
+          data-track="see_repo_clicked"
+          data-track-location={location}
+        >
+          <div className={buttonClass}>
+            <Github className="w-5 h-5 text-white opacity-60 group-hover:opacity-100 transition-opacity duration-150" />
+            <div className={labelClass}>See repo</div>
+          </div>
+        </a>
+      )}
     </div>
   );
 }

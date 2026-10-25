@@ -30,22 +30,12 @@ export default function IntroSection() {
             past 1,000 GitHub stars. Today I&apos;m prototyping Deepground, an
             AI taskforce for small businesses.
           </div>
-          {/* Below lg the wrapper dissolves (`contents`) so `order-*` can put the
-              Book a call / Message me buttons after the "Based on" sources. */}
-          <div className="contents lg:flex lg:flex-wrap lg:items-center lg:gap-3 lg:pt-2">
-            <div className="order-1 w-full max-w-md lg:order-none">
-              <AskGauravGPT />
-            </div>
-            <div className="order-4 lg:order-none">
-              <ContactMe location="hero" />
-            </div>
+          <div className="w-full max-w-md">
+            <AskGauravGPT />
           </div>
-          <div className="order-2 lg:order-none">
-            <RotatingQuestions />
-          </div>
-          <div className="order-3 lg:order-none">
-            <ContextSources align="start" />
-          </div>
+          <RotatingQuestions />
+          <ContextSources align="start" />
+          <ContactMe location="hero" showRepo />
         </div>
       </div>
     </div>
