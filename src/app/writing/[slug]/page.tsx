@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ArticleMarkdown, { InlineMarkdown } from "@/components/writing/article-markdown";
-import ShareButtons from "@/components/writing/share-buttons";
+import ArticleCta from "@/components/writing/article-cta";
 import TableOfContents from "@/components/writing/table-of-contents";
 import ZoomableImage from "@/components/writing/zoomable-image";
 import WritingLiveReload from "@/components/writing/writing-live-reload";
@@ -151,19 +151,11 @@ export default async function Article({
 
       <HorizontalRule />
 
-      <ArticleMarkdown>{article.content}</ArticleMarkdown>
-
-      <HorizontalRule />
-
-      <div
-        data-no-index
-        className="flex flex-wrap items-center justify-between gap-4"
-      >
-        <span className="text-sm font-medium text-white/50">
-          Enjoyed this? Share it
-        </span>
-        <ShareButtons url={articleUrl} title={article.title} />
+      <div id="article-body">
+        <ArticleMarkdown>{article.content}</ArticleMarkdown>
       </div>
+
+      <ArticleCta targetId="article-body" />
 
       <TableOfContents
         headings={headings}

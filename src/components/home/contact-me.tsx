@@ -14,48 +14,58 @@ const labelClass =
 export default function ContactMe({
   location,
   showRepo = false,
+  iconOnlyOnMobile = false,
 }: {
   location: string;
   showRepo?: boolean;
+  /** Below the `sm` breakpoint, show only the icons (labels stay for screen readers). */
+  iconOnlyOnMobile?: boolean;
 }) {
+  const btn = iconOnlyOnMobile
+    ? `${buttonClass} !px-2.5 sm:!px-4`
+    : buttonClass;
+  const label = iconOnlyOnMobile ? `${labelClass} hidden sm:block` : labelClass;
   return (
     <div className="flex flex-wrap items-center gap-3">
       <a
         href={CAL_URL}
+        aria-label="Book a call"
         target="_blank"
         rel="noopener noreferrer"
         className="cursor-default max-w-fit"
         data-track="book_call_clicked"
         data-track-location={location}
       >
-        <div className={buttonClass}>
+        <div className={btn}>
           <CalendarDays className="w-5 h-5 text-white opacity-60 group-hover:opacity-100 transition-opacity duration-150" />
-          <div className={labelClass}>Book a call</div>
+          <div className={label}>Book a call</div>
         </div>
       </a>
       <Link
         href="/contact"
+        aria-label="Message me"
         className="cursor-default max-w-fit"
         data-track="message_me_clicked"
         data-track-location={location}
       >
-        <div className={buttonClass}>
+        <div className={btn}>
           <MessageSquare className="w-5 h-5 text-white opacity-60 group-hover:opacity-100 transition-opacity duration-150" />
-          <div className={labelClass}>Message me</div>
+          <div className={label}>Message me</div>
         </div>
       </Link>
       {showRepo && (
         <a
           href={REPO_URL}
+          aria-label="See repo"
           target="_blank"
           rel="noopener noreferrer"
           className="cursor-default max-w-fit"
           data-track="see_repo_clicked"
           data-track-location={location}
         >
-          <div className={buttonClass}>
+          <div className={btn}>
             <Github className="w-5 h-5 text-white opacity-60 group-hover:opacity-100 transition-opacity duration-150" />
-            <div className={labelClass}>See repo</div>
+            <div className={label}>See repo</div>
           </div>
         </a>
       )}
