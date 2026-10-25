@@ -44,8 +44,10 @@ Supported markdown: headings (`##`, `###`), lists, links, images (put files in
 blocks, tables and other GitHub-flavored markdown. Use `##` for section
 headings; the article title is already rendered as the page heading.
 
-This file is ignored by the site. After publishing, run `pnpm pc:index` so
-GauravGPT learns about the new article.
+This file is ignored by the site. After you push to `main`, the "Reindex
+GauravGPT" GitHub workflow (`.github/workflows/pc-reindex.yml`) rebuilds the
+Pinecone index automatically, so GauravGPT learns about the new article. You
+can still run `pnpm pc:index` by hand (see `scripts/indexSite.ts`).
 
 ## Fetch a cover photo automatically
 

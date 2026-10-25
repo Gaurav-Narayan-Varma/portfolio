@@ -29,6 +29,7 @@ export default function NewArticleBanner() {
 
   return (
     <Link
+      data-no-index // temporary announcement, not something GauravGPT should learn
       href={`/writing/${latest.slug}`}
       className="cursor-default group flex w-full items-center justify-center gap-3 border-b border-emerald-400/20 bg-gradient-to-r from-emerald-600/15 via-teal-600/12 to-emerald-600/15 px-5 py-2.5 text-sm font-medium text-white/80 transition-colors duration-150 hover:from-emerald-600/25 hover:via-teal-600/20 hover:to-emerald-600/25 hover:text-white"
     >

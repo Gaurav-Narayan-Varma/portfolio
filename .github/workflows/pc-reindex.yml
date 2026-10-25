@@ -1,0 +1,75 @@
+name: Reindex GauravGPT
+
+# Keeps the Pinecone index behind GauravGPT in sync with the site, so you never
+# have to remember `pnpm pc:index`. Runs on pushes to main that touch anything
+# GauravGPT can learn from (pages, components, copy, articles, the resume), and
+# skips pushes that don't (API routes, images, docs, ...).
+#
+# It builds the pushed commit on the runner, serves it locally, and crawls that
+# copy, so it never races the Vercel deploy and always indexes exactly what you
+# pushed. The sync is safe to repeat: records are overwritten and stale ones
+# deleted (see scripts/indexSite.ts).
+#
+# Needs these repository secrets (Settings -> Secrets and variables -> Actions):
+#   API_PINECONE_API_KEY, API_PINECONE_INDEX_NAME
+# It uses the default "ns1" namespace, like the site. (If you ever set
+# API_PINECONE_NAMESPACE on Vercel, pass it here too, but only when non-empty:
+# an unset secret is an empty string, which would skip the "ns1" default.)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/app/**"
+      - "!src/app/api/**"
+      - "src/components/**"
+      - "src/constants/**"
+      - "src/lib/**"
+      - "content/writing/**"
+      - "!content/writing/README.md"
+      - "public/Resume.pdf"
+      - "scripts/indexSite.ts"
+      - "src/server/pinecone.ts"
+      - "next.config.ts"
+      - ".github/workflows/pc-reindex.yml"
+  workflow_dispatch:
+
+# If pushes land back to back, finish the current sync, then run once more for
+# the latest commit (cancelling mid-sync could leave the index half-updated).
+concurrency:
+  group: pc-reindex
+  cancel-in-progress: false
+
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4 # version comes from "packageManager"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build the site
+        run: pnpm build
+
+      - name: Serve the build
+        run: |
+          pnpm exec next start --port 3001 > server.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -fsS http://localhost:3001 > /dev/null && exit 0
+            sleep 2
+          done
+          echo "Server did not start:"; cat server.log; exit 1
+
+      - name: Reindex into Pinecone
+        env:
+          API_PINECONE_API_KEY: ${{ secrets.API_PINECONE_API_KEY }}
+          API_PINECONE_INDEX_NAME: ${{ secrets.API_PINECONE_INDEX_NAME }}
+        run: pnpm pc:index --url http://localhost:3001
