@@ -1,3 +1,4 @@
+import ArticleCta from "@/components/writing/article-cta";
 import { projectMetadata } from "@/lib/site";
 import DeepgroundGrader from "@/components/projects/deepground/deepground-grader";
 import DeepgroundIntro from "@/components/projects/deepground/deepground-intro";
@@ -12,27 +13,31 @@ export const metadata = projectMetadata("deepground");
 export default function Deepground() {
   return (
     <div className="flex flex-col gap-16 w-full max-w-[1200px] px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 animate-fade-in h-fit">
-      <DeepgroundIntro />
+      <div id="project-body" className="flex flex-col gap-16">
+        <DeepgroundIntro />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <DeepgroundProblem />
+        <DeepgroundProblem />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <DeepgroundGrader />
+        <DeepgroundGrader />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <DeepgroundTaskforce />
+        <DeepgroundTaskforce />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <DeepgroundReception />
+        <DeepgroundReception />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <DeepgroundSiteBuilder />
+        <DeepgroundSiteBuilder />
+      </div>
+
+      <ArticleCta targetId="project-body" source="project" />
     </div>
   );
 }

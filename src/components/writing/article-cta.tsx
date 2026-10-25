@@ -4,20 +4,40 @@ import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ContactMe from "@/components/home/contact-me";
 
-/** Reading progress (0-1) at which the floating bar slides in. */
-const SHOW_AT = 0.01;
+/**
+ * Pixels scrolled from the top of the page before the floating bar slides in,
+ * per kind of page. Project pages open with a long intro and screenshots, so
+ * they wait longer.
+ */
+const SHOW_AFTER_PX = { article: 270, project: 280 } as const;
+
+/**
+ * How far along (0-1) the green progress line is at the moment the bar first
+ * appears, per kind of page. From there it fills linearly and reaches 100% at
+ * the end of the page body.
+ */
+const START_FILL = { article: 0.2, project: 0.15 } as const;
 const HEADLINE = "Interested in building with Gaurav?";
 
 /**
- * Article call to action in two forms:
- *  - a floating bar that slides in once the reader is 15% of the way through
- *    `targetId` (the article body), with a progress line along its top edge;
+ * Call to action for long pages (articles and project pages), in two forms:
+ *  - a floating bar that slides in once the reader has scrolled a set number
+ *    of pixels, with a progress line along its top edge that tracks
+ *    `targetId` (the page body);
  *  - a full section after the article that the bar hands off to: the bar
  *    slides away as the section scrolls into view.
  */
-export default function ArticleCta({ targetId }: { targetId: string }) {
+export default function ArticleCta({
+  targetId,
+  source = "article",
+}: {
+  /** Id of the element whose height defines "the page" for progress. */
+  targetId: string;
+  /** Prefix for click-tracking locations (`<source>_floating_bar`, `<source>_footer`). */
+  source?: "article" | "project";
+}) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [progress, setProgress] = useState(0); // drives when the bar appears
+  const [pastThreshold, setPastThreshold] = useState(false); // drives when the bar appears
   const [fill, setFill] = useState(0); // what the green line shows
   const [sectionInView, setSectionInView] = useState(false);
   // In-memory only: nothing is saved, so a reload or new visit shows the bar again.
@@ -28,15 +48,15 @@ export default function ArticleCta({ targetId }: { targetId: string }) {
       const el = document.getElementById(targetId);
       if (el) {
         const rect = el.getBoundingClientRect();
-        // Progress is measured at the middle of the viewport.
-        const p = (window.innerHeight / 2 - rect.top) / rect.height;
-        setProgress(Math.min(1, Math.max(0, p)));
-        // The line counts the whole page above the end of the article, measured
-        // at the bottom of the viewport, so it is already well along when the
-        // bar appears and fills completely as the article ends.
-        const pageY = window.scrollY + window.innerHeight;
-        const endY = window.scrollY + rect.bottom;
-        setFill(Math.min(1, Math.max(0, pageY / endY)));
+        const showAt = SHOW_AFTER_PX[source];
+        setPastThreshold(window.scrollY >= showAt);
+        // The line starts at START_FILL when the bar appears and fills
+        // linearly to 100% when the end of the body reaches mid-viewport.
+        const endAt = window.scrollY + rect.bottom - window.innerHeight / 2;
+        const span = Math.max(1, endAt - showAt);
+        const t = Math.min(1, Math.max(0, (window.scrollY - showAt) / span));
+        const startFill = START_FILL[source];
+        setFill(startFill + (1 - startFill) * t);
       }
       const section = sectionRef.current;
       if (section) {
@@ -53,9 +73,9 @@ export default function ArticleCta({ targetId }: { targetId: string }) {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, [targetId]);
+  }, [targetId, source]);
 
-  const barVisible = !dismissed && progress >= SHOW_AT && !sectionInView;
+  const barVisible = !dismissed && pastThreshold && !sectionInView;
 
   return (
     <>
@@ -87,7 +107,7 @@ export default function ArticleCta({ targetId }: { targetId: string }) {
             <div className="min-w-0 flex-1 truncate text-sm font-medium text-white/80 sm:text-[15px]">
               Build with Gaurav
             </div>
-            <ContactMe location="article_floating_bar" iconOnlyOnMobile />
+            <ContactMe location={`${source}_floating_bar`} iconOnlyOnMobile />
             <button
               type="button"
               aria-label="Dismiss"
@@ -120,7 +140,7 @@ export default function ArticleCta({ targetId }: { targetId: string }) {
             a message and tell me what you&apos;re working on.
           </p>
         </div>
-        <ContactMe location="article_footer" />
+        <ContactMe location={`${source}_footer`} />
       </section>
     </>
   );

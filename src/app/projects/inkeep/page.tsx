@@ -1,3 +1,4 @@
+import ArticleCta from "@/components/writing/article-cta";
 import { projectMetadata } from "@/lib/site";
 import HorizontalRule from "@/components/projects/horizontal-rule";
 import InkeepCommunity from "@/components/projects/inkeep/inkeep-community";
@@ -12,27 +13,31 @@ export const metadata = projectMetadata("inkeep");
 export default function Inkeep() {
   return (
     <div className="flex flex-col gap-16 w-full max-w-[1200px] px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 animate-fade-in h-fit">
-      <InkeepIntro />
+      <div id="project-body" className="flex flex-col gap-16">
+        <InkeepIntro />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <InkeepCommunity />
+        <InkeepCommunity />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <InkeepDocs />
+        <InkeepDocs />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <InkeepEngineering />
+        <InkeepEngineering />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <InkeepForwardDeployed />
+        <InkeepForwardDeployed />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <InkeepSpinoffLogo />
+        <InkeepSpinoffLogo />
+      </div>
+
+      <ArticleCta targetId="project-body" source="project" />
     </div>
   );
 }

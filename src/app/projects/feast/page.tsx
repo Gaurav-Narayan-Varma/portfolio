@@ -1,3 +1,4 @@
+import ArticleCta from "@/components/writing/article-cta";
 import { projectMetadata } from "@/lib/site";
 import FeastAdmin from "@/components/projects/feast/feast-admin";
 import FeastAuth from "@/components/projects/feast/feast-auth";
@@ -13,31 +14,35 @@ export const metadata = projectMetadata("feast");
 export default function Feast() {
   return (
     <div className="flex flex-col gap-16 w-full max-w-[1200px] px-5 md:px-10 lg:px-12 pt-[58px] lg:pt-18 pb-18 animate-fade-in h-fit">
-      <FeastIntro />
+      <div id="project-body" className="flex flex-col gap-16">
+        <FeastIntro />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <FeastBackground />
+        <FeastBackground />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <FeastTechStack />
+        <FeastTechStack />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <FeastAuth />
+        <FeastAuth />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <FeastOnboarding />
+        <FeastOnboarding />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <FeastAdmin />
+        <FeastAdmin />
 
-      <HorizontalRule />
+        <HorizontalRule />
 
-      <FeastBookingFlow />
+        <FeastBookingFlow />
+      </div>
+
+      <ArticleCta targetId="project-body" source="project" />
     </div>
   );
 }
