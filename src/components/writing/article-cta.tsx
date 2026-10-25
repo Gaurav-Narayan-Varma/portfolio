@@ -122,12 +122,16 @@ export default function ArticleCta({
         </div>
       </div>
 
+      {/* No box: a green glow rising from the bottom edge of the page, with
+          the text sitting on it. The negative margins cancel the page's side
+          and bottom padding (px-5 md:px-10 lg:px-12, pb-18) so the glow runs to
+          the edges; the radial fade keeps it from showing a hard side edge. */}
       <section
         ref={sectionRef}
         data-no-index
-        className="mt-6 flex flex-col gap-6 rounded-2xl border border-emerald-400/25 bg-gradient-to-b from-emerald-600/10 to-ds-gray-100 p-6 sm:p-8"
+        className="-mb-18 -mx-5 mt-6 flex flex-col items-center gap-6 bg-[radial-gradient(ellipse_at_bottom,rgba(16,185,129,0.2),transparent_65%)] px-5 pb-18 pt-20 text-center md:-mx-10 md:px-10 lg:-mx-12 lg:px-12"
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex max-w-md flex-col gap-3">
           <h2 className="font-mono text-base font-medium uppercase tracking-[0.15em] text-emerald-400">
             Work with me
           </h2>
@@ -136,7 +140,7 @@ export default function ArticleCta({
             a message and tell me what you&apos;re working on.
           </p>
         </div>
-        <ContactMe location={`${source}_footer`} />
+        <ContactMe location={`${source}_footer`} className="justify-center" />
       </section>
     </>
   );

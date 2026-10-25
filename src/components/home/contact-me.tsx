@@ -15,18 +15,21 @@ export default function ContactMe({
   location,
   showRepo = false,
   iconOnlyOnMobile = false,
+  className = "",
 }: {
   location: string;
   showRepo?: boolean;
   /** Below the `sm` breakpoint, show only the icons (labels stay for screen readers). */
   iconOnlyOnMobile?: boolean;
+  /** Extra classes for the wrapper, e.g. `justify-center`. */
+  className?: string;
 }) {
   const btn = iconOnlyOnMobile
     ? `${buttonClass} !px-2.5 sm:!px-4`
     : buttonClass;
   const label = iconOnlyOnMobile ? `${labelClass} hidden sm:block` : labelClass;
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
       <a
         href={CAL_URL}
         aria-label="Book a call"
