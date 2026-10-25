@@ -71,12 +71,18 @@ export default function ArticleCta({ targetId }: { targetId: string }) {
               : "translate-y-6 opacity-0"
           }`}
         >
-          <div className="absolute inset-x-0 top-0 h-0.5 bg-white/10">
-            <div
-              className="h-full bg-emerald-400/80"
-              style={{ width: `${fill * 100}%` }}
-            />
-          </div>
+          {/* Progress line: a top-only border that follows the bar's corner
+              radius (it tapers off around the curves). The green one is
+              clipped from the right to show progress. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[27px] border-t-2 border-white/10"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[27px] border-t-2 border-emerald-400/80"
+            style={{ clipPath: `inset(0 ${(1 - fill) * 100}% 0 0)` }}
+          />
           <div className="flex items-center gap-3 pb-3 pl-6 pr-5 pt-4 sm:gap-6 sm:pb-4 sm:pl-8 sm:pr-8 sm:pt-5">
             <div className="min-w-0 flex-1 truncate text-sm font-medium text-white/80 sm:text-[15px]">
               Build with Gaurav
