@@ -30,12 +30,18 @@ export default function IntroSection() {
             past 1,000 GitHub stars. Today I&apos;m prototyping Deepground, an
             AI taskforce for small businesses.
           </div>
-          <div className="w-full max-w-md">
-            <AskGauravGPT />
+          {/* GauravGPT's composer, suggestion and sources read as one unit
+              (tight spacing); the contact buttons sit apart below it. */}
+          <div className="flex flex-col gap-3">
+            <div className="w-full max-w-md">
+              <AskGauravGPT />
+            </div>
+            <RotatingQuestions />
+            <ContextSources align="start" />
           </div>
-          <RotatingQuestions />
-          <ContextSources align="start" />
-          <ContactMe location="hero" showRepo />
+          <div className="pt-3">
+            <ContactMe location="hero" showRepo />
+          </div>
         </div>
       </div>
     </div>

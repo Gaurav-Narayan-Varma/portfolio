@@ -235,6 +235,7 @@ const ACTION_PHRASES: [event: string, phrase: string][] = [
   ["contact_form_submitted", "submitted the contact form"],
   ["linkedin_clicked", "clicked through to your LinkedIn"],
   ["github_clicked", "clicked through to your GitHub"],
+  ["see_repo_clicked", "opened the site's GitHub repo"],
 ];
 
 /** GauravGPT answers are markdown; flatten to plain prose for the email. */

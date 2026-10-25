@@ -6,7 +6,7 @@ import NavItem from "./nav-item";
 import UserProfileCard from "./profile-chip";
 import DesignCredit from "@/components/design-credit";
 import { RESUME_FILENAME, RESUME_PATH } from "@/constants/resume";
-import { SHOW_WRITING } from "@/lib/site";
+import { REPO_URL, SHOW_WRITING } from "@/lib/site";
 
 export const mainNavItems = [
   {
@@ -48,10 +48,10 @@ export const connectNavItems = [
     track: "linkedin_clicked",
   },
   {
-    href: "https://github.com/Gaurav-Narayan-Varma",
+    href: REPO_URL,
     icon: "/github.svg",
     label: "GitHub",
-    track: "github_clicked",
+    track: "see_repo_clicked",
   },
 ];
 
