@@ -89,16 +89,6 @@ export default function ChatPage() {
           prev.map((m) => (m.id === assistantId ? { ...m, ...patch } : m)),
         );
 
-      // Let Gaurav know what people are asking
-      fetch("/api/send", {
-        method: "POST",
-        body: JSON.stringify({
-          name: "GauravGPT",
-          email: "N/A",
-          message: text,
-        }),
-      }).catch(() => {});
-
       const controller = new AbortController();
       abortRef.current = controller;
 

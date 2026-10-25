@@ -42,6 +42,7 @@ const COLUMNS = [
   "utm_medium",
   "utm_campaign",
   "question",
+  "answer",
   "status",
   "unanswered",
   "reason",
@@ -67,6 +68,7 @@ SELECT
   properties.utm_medium,
   properties.utm_campaign,
   properties.question,
+  properties.answer,
   properties.status,
   properties.likely_unanswered,
   properties.reason,
@@ -178,8 +180,10 @@ function pathOf(row: Row) {
   }
 }
 
+type Source = { name: string; detail?: string };
+
 /** Where the visitor came from: UTM tags first, then the referring site. */
-function sourceOf(rows: Row[]) {
+function sourceOf(rows: Row[]): Source | null {
   for (const row of rows) {
     let source = str(row.utm_source);
     let medium = str(row.utm_medium);
@@ -198,67 +202,51 @@ function sourceOf(rows: Row[]) {
       }
     }
     if (source) {
-      return clean(
-        [source, medium, campaign].filter(Boolean).join(" / ")
-      );
+      const detail = [medium, campaign].filter(Boolean).join(", ");
+      return {
+        name: clean(source),
+        detail: detail ? clean(detail) : undefined,
+      };
     }
   }
 
   for (const row of rows) {
     const domain = str(row.referring_domain);
     if (domain && domain !== "$direct" && domain !== OWN_HOST) {
-      return clean(domain);
+      return { name: clean(domain) };
     }
   }
-  return "Direct";
+  return null;
 }
 
-const pageName = (path: string) => (path === "/" ? "/ (home)" : path);
+/** "a", "a and b", "a, b and c". */
+function joinList(items: string[]) {
+  if (items.length <= 1) return items.join("");
+  return `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
+}
 
-const EVENT_LABELS: Record<string, string> = {
-  resume_downloaded: "Downloaded the resume",
-  book_call_clicked: "Clicked Book a call",
-  message_me_clicked: "Clicked Message me",
-  contact_form_submitted: "Submitted the contact form",
-  linkedin_clicked: "Clicked LinkedIn",
-  github_clicked: "Clicked GitHub",
-};
+const pageLabel = (path: string) => (path === "/" ? "the home page" : path);
 
-type Step = { ts: number; text: string };
+/** Click events worth mentioning, phrased as "They ...". */
+const ACTION_PHRASES: [event: string, phrase: string][] = [
+  ["resume_downloaded", "downloaded your resume"],
+  ["book_call_clicked", "clicked Book a call"],
+  ["message_me_clicked", "clicked Message me"],
+  ["contact_form_submitted", "submitted the contact form"],
+  ["linkedin_clicked", "clicked through to your LinkedIn"],
+  ["github_clicked", "clicked through to your GitHub"],
+];
 
-function timelineOf(rows: Row[]): Step[] {
-  const steps: Step[] = [];
-  for (const row of rows) {
-    const event = String(row.event);
-    let text: string | undefined;
-
-    if (event === "$pageview") {
-      const path = pathOf(row);
-      if (path) text = `Viewed ${pageName(path)}`;
-    } else if (event === "gauravgpt_question") {
-      const question = clean(str(row.question) ?? "(empty)", 300);
-      const notes = [
-        row.unanswered === true ? "couldn't answer" : undefined,
-        str(row.status) && row.status !== "ok"
-          ? `${row.status}`
-          : undefined,
-      ].filter(Boolean);
-      text = `Asked GauravGPT: "${question}"${notes.length ? ` (${notes.join(", ")})` : ""}`;
-    } else if (event === "gauravgpt_blocked") {
-      text = `Hit a GauravGPT limit (${clean(str(row.reason) ?? "unknown", 40)})`;
-    } else if (EVENT_LABELS[event]) {
-      const where = str(row.location);
-      text = `${EVENT_LABELS[event]}${where ? ` (${clean(where, 40)})` : ""}`;
-    } else if (!event.startsWith("$")) {
-      text = clean(event, 60);
-    }
-
-    if (!text) continue;
-    // Collapse a refresh or repeat into the previous identical step.
-    if (steps.at(-1)?.text === text) continue;
-    steps.push({ ts: Number(row.ts), text });
-  }
-  return steps;
+/** GauravGPT answers are markdown; flatten to plain prose for the email. */
+function plainAnswer(answer: string, max = 1500) {
+  const text = answer
+    .replace(/^\s{0,3}#{1,6}\s+/gm, "")
+    .replace(/^\s*[-*+]\s+/gm, "")
+    .replace(/\*\*|__|`/g, "")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1 ($2)")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.length > max ? `${text.slice(0, max).trimEnd()}...` : text;
 }
 
 export type Summary = {
@@ -267,6 +255,8 @@ export type Summary = {
   text: string;
   hasPageview: boolean;
 };
+
+const SUBJECT = "New personal site visitor!";
 
 const escapeHtml = (value: string) =>
   value
@@ -285,83 +275,104 @@ const clock = (seconds: number) =>
 
 const day = (seconds: number) =>
   new Date(seconds * 1000).toLocaleDateString("en-US", {
-    weekday: "short",
-    month: "short",
+    weekday: "long",
+    month: "long",
     day: "numeric",
     timeZone: TIME_ZONE,
   });
 
+/** The visit written up as a few plain paragraphs (no lists or tables). */
 export function summarize(session: Session): Summary {
   const { rows } = session;
-  const steps = timelineOf(rows);
-  const hasPageview = rows.some((row) => row.event === "$pageview");
+  const pageviews = rows.filter((row) => row.event === "$pageview");
+  const hasPageview = pageviews.length > 0;
+  const has = (event: string) => rows.some((row) => row.event === event);
 
+  const paragraphs: string[] = [];
+
+  // 1. Who, when, from where.
   const source = sourceOf(rows);
-  const pages = new Set(
-    rows.filter((r) => r.event === "$pageview").map((r) => pathOf(r))
-  );
-  pages.delete(undefined);
-  const questions = rows.filter((r) => r.event === "gauravgpt_question").length;
-  const downloadedResume = rows.some((r) => r.event === "resume_downloaded");
-  const minutes = Math.max(1, Math.round((session.end - session.start) / 60));
-
+  const minutes = Math.round((session.end - session.start) / 60);
+  const length = minutes <= 1 ? "about a minute" : `about ${minutes} minutes`;
   const first = rows[0];
-  const device = [str(first.device), str(first.browser), str(first.os)]
-    .filter(Boolean)
-    .map((v) => clean(v as string, 40))
-    .join(" · ");
+  const browser = str(first.browser);
+  const os = str(first.os);
+  const deviceType = str(first.device);
   const country = str(first.country);
 
-  const landing = rows.find((r) => r.event === "$pageview");
-  const facts: [string, string][] = [
-    ["Came from", source],
-    ["Landed on", landing ? pageName(pathOf(landing) ?? "?") : "?"],
-    ["When", `${day(session.start)}, ${clock(session.start)}`],
-    ["Time on site", `${minutes} min`],
-    ["Pages viewed", String(pages.size)],
-    ["Downloaded resume", downloadedResume ? "Yes" : "No"],
-    ["GauravGPT questions", String(questions)],
-    ...(device ? ([["Device", device]] as [string, string][]) : []),
-    ...(country ? ([["Country", clean(country, 40)]] as [string, string][]) : []),
+  const intro = [
+    `Someone visited your site on ${day(session.start)} at ${clock(session.start)} and spent ${length} on it.`,
+    source
+      ? `They came from ${source.name}${source.detail ? ` (${source.detail})` : ""}.`
+      : "They arrived directly, with no referring site or tracking tags.",
   ];
+  const where = [
+    browser && os ? `${clean(browser, 40)} on ${clean(os, 40)}` : browser || os,
+    deviceType ? `(${clean(deviceType, 20).toLowerCase()})` : undefined,
+  ]
+    .filter(Boolean)
+    .map((part) => clean(String(part), 60))
+    .join(" ");
+  if (where || country) {
+    intro.push(
+      `They were using ${where || "an unknown browser"}${country ? `, in ${clean(country, 40)}` : ""}.`
+    );
+  }
+  paragraphs.push(intro.join(" "));
 
-  const highlights = [
-    `${pages.size} page${pages.size === 1 ? "" : "s"}`,
-    downloadedResume ? "downloaded resume" : undefined,
-    questions
-      ? `asked ${questions} question${questions === 1 ? "" : "s"}`
-      : undefined,
-  ].filter(Boolean);
-  const subject = `Visitor from ${source}: ${highlights.join(", ")}`;
+  // 2. Pages, in the order they first opened them.
+  const pages = [
+    ...new Set(pageviews.map((row) => pathOf(row)).filter(Boolean) as string[]),
+  ];
+  if (pages.length) {
+    const [landing, ...rest] = pages;
+    const pageText = rest.length
+      ? `They landed on ${pageLabel(landing)}, then looked at ${joinList(rest.map(pageLabel))}.`
+      : `They only viewed ${pageLabel(landing)}.`;
 
-  const text = [
-    ...facts.map(([k, v]) => `${k}: ${v}`),
-    "",
-    "What they did:",
-    ...steps.map((s) => `  ${clock(s.ts)}  ${s.text}`),
-  ].join("\n");
+    // 3. Clicks and downloads.
+    const did = ACTION_PHRASES.filter(([event]) => has(event)).map(
+      ([, phrase]) => phrase
+    );
+    const actionText = did.length
+      ? `They ${joinList(did)}.${has("resume_downloaded") ? "" : " They did not download your resume."}`
+      : "They did not download your resume or click any of your links.";
 
-  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:14px;color:#111;max-width:600px">
-<table style="border-collapse:collapse;margin-bottom:16px">
-${facts
-  .map(
-    ([k, v]) =>
-      `<tr><td style="padding:3px 16px 3px 0;color:#666">${escapeHtml(k)}</td><td style="padding:3px 0"><b>${escapeHtml(v)}</b></td></tr>`
-  )
-  .join("\n")}
-</table>
-<div style="font-weight:600;margin-bottom:6px">What they did</div>
-<table style="border-collapse:collapse">
-${steps
-  .map(
-    (s) =>
-      `<tr><td style="padding:3px 14px 3px 0;color:#888;white-space:nowrap;vertical-align:top">${escapeHtml(clock(s.ts))}</td><td style="padding:3px 0">${escapeHtml(s.text)}</td></tr>`
-  )
-  .join("\n")}
-</table>
+    paragraphs.push(`${pageText} ${actionText}`);
+  }
+
+  // 4. Each GauravGPT exchange, in order.
+  const asked = rows.filter((row) => row.event === "gauravgpt_question");
+  asked.forEach((row, i) => {
+    const question = clean(str(row.question) ?? "(empty message)", 400);
+    const answer = str(row.answer);
+    const opener = i === 0 ? "They asked GauravGPT" : "They then asked";
+
+    let text: string;
+    if (answer) {
+      text = `${opener} “${question}” and it replied: “${plainAnswer(answer)}”`;
+      if (row.unanswered === true) {
+        text += " GauravGPT said it didn't know the answer to this one.";
+      }
+    } else {
+      const status = str(row.status);
+      text = `${opener} “${question}”, but it didn't return an answer${status && status !== "ok" ? ` (${status})` : ""}.`;
+    }
+    paragraphs.push(text);
+  });
+  if (!asked.length) {
+    paragraphs.push("They didn't ask GauravGPT anything.");
+  }
+  if (has("gauravgpt_blocked")) {
+    paragraphs.push("They also ran into one of GauravGPT's usage limits.");
+  }
+
+  const text = paragraphs.join("\n\n");
+  const html = `<div style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:15px;line-height:1.6;color:#111;max-width:600px">
+${paragraphs.map((p) => `<p style="margin:0 0 14px">${escapeHtml(p)}</p>`).join("\n")}
 </div>`;
 
-  return { subject, html, text, hasPageview };
+  return { subject: SUBJECT, html, text, hasPageview };
 }
 
 /* ---------------------------------- Runner ---------------------------------- */

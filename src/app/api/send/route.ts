@@ -9,8 +9,9 @@ const escapeHtml = (value: unknown) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-// Each call sends an email (the contact form and a copy of every chat
-// question), so cap how many one visitor can trigger.
+// Each call sends an email (the contact forms), so cap how many one visitor
+// can trigger. Chat questions are covered by the visitor summary email
+// instead (src/server/visitor-digest.ts).
 const SENDS_PER_HOUR = 20;
 
 export async function POST(req: Request) {
