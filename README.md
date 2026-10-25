@@ -17,4 +17,4 @@ Create a `.env` with `AI_GATEWAY_API_KEY`, `API_PINECONE_API_KEY`, `API_PINECONE
 
 - **Writing:** add a markdown file to `content/writing/` ([format](content/writing/README.md)).
 - **GauravGPT's knowledge:** `pnpm pc:index` re-crawls the site into Pinecone. A GitHub Action does this automatically when you push relevant changes.
-- **Visit summaries:** a scheduled Action emails me a summary of each finished visit.
+- **Visit summaries:** a scheduled Inngest function emails me a summary of each finished visit.

@@ -7,7 +7,7 @@ import { claimOnce, releaseClaim } from "@/server/rate-limit";
  *
  * A "visit" is a PostHog session (browser events plus the GauravGPT question
  * events, which carry the same session id). A summary can only exist after
- * the visit is over, so a scheduled job (see .github/workflows/visitor-digest.yml)
+ * the visit is over, so a scheduled Inngest function (src/server/inngest/functions.ts)
  * calls `sendVisitorDigests()` every ~15 minutes. Each run:
  *   1. pulls the last few hours of events from PostHog (HogQL query API),
  *   2. groups them by session,
