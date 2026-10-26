@@ -205,7 +205,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="relative flex h-[calc(100dvh-71.05px)] w-full flex-col overflow-hidden animate-fade-in lg:h-screen">
+    <div className="relative flex h-[calc(100dvh-76px)] w-full flex-col overflow-hidden animate-fade-in lg:h-screen">
       {/* Soft Gemini-style glow behind the composer */}
       <div
         aria-hidden

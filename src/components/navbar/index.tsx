@@ -4,7 +4,7 @@ import { MessageCircle, PenLine } from "lucide-react";
 import { usePathname } from "next/navigation";
 import NavItem from "./nav-item";
 import UserProfileCard from "./profile-chip";
-import DesignCredit from "@/components/design-credit";
+import FooterLinks from "@/components/footer-links";
 import { RESUME_FILENAME, RESUME_PATH } from "@/constants/resume";
 import { REPO_URL, SHOW_WRITING } from "@/lib/site";
 
@@ -125,7 +125,7 @@ export default function Sidebar() {
             Resume
           </div>
         </button>
-        <DesignCredit />
+        <FooterLinks />
       </div>
     </div>
   );

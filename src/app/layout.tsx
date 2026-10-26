@@ -95,7 +95,7 @@ export default function RootLayout({
             <Navbar />
             <NavbarMobile />
             {/* <main> is also what scripts/indexSite.ts extracts when crawling */}
-            <main className="w-full flex justify-center pt-[71.05px] lg:pt-0 lg:pl-[260px]">
+            <main className="w-full flex justify-center pt-[76px] lg:pt-0 lg:pl-[260px]">
               {children}
             </main>
           </div>

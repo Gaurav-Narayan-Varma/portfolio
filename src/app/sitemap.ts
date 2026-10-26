@@ -24,5 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     { url: `${SITE_URL}/contact`, lastModified: now, priority: 0.5 },
+    { url: `${SITE_URL}/privacy`, lastModified: now, priority: 0.2 },
   ];
 }

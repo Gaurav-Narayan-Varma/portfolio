@@ -2,7 +2,7 @@
 import { connectNavItems, mainNavItems } from "@/components/navbar";
 import NavItem from "@/components/navbar/nav-item";
 import UserProfileCard from "@/components/navbar/profile-chip";
-import DesignCredit from "@/components/design-credit";
+import FooterLinks from "@/components/footer-links";
 import { RESUME_FILENAME, RESUME_PATH } from "@/constants/resume";
 import cx from "clsx";
 import { MenuIcon, X } from "lucide-react";
@@ -95,7 +95,7 @@ export default function NavbarMobile() {
               Resume
             </div>
           </button>
-          <DesignCredit className="mt-3" />
+          <FooterLinks className="mt-3" onNavigate={() => setIsOpen(false)} />
         </div>
       </div>
     </div>

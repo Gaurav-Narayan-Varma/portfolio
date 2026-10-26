@@ -1,10 +1,11 @@
 import { ContextSources } from "@/components/chat/context-sources";
+import Link from "next/link";
 import AskGauravGPT from "./ask-gauravgpt";
 import ContactMe from "./contact-me";
 import RotatingQuestions from "./rotating-questions";
 export default function IntroSection() {
   return (
-    <div className="flex flex-col pt-16 lg:pt-18 px-5 md:px-10 lg:px-12 pb-12 gap-8">
+    <div className="flex flex-col pt-10 md:pt-16 lg:pt-18 px-5 md:px-10 lg:px-12 pb-12 gap-8">
       <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
         <figure className="hidden lg:flex flex-col gap-2 w-60 shrink-0 lg:order-2 m-0">
           <div className="relative w-full aspect-21/34 overflow-hidden rounded-2xl">
@@ -42,6 +43,14 @@ export default function IntroSection() {
           <div className="pt-3">
             <ContactMe location="hero" />
           </div>
+          {/* Phones only: on desktop the sidebar carries this link */}
+          <Link
+            href="/privacy"
+            data-no-index
+            className="self-start text-xs text-white/40 underline transition-colors duration-150 hover:text-white/80 lg:hidden"
+          >
+            Privacy
+          </Link>
         </div>
       </div>
     </div>
